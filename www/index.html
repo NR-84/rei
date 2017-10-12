@@ -11,24 +11,20 @@
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navigation-bar.css">
 
   <script src="js/test1.js"></script>
-  <script src="js/weight.js"></script>
-  <script src="js/we-app.js"></script>
-  
+  <script src="js/wlist.js"></script>
+  <script src="js/back.js"></script>
+  <script src="js/training.js"></script>
+  <!--<script src="js/backup.js"></script>-->
   <script>
   </script>
 </head>
+
+<!-- https://tutorial.onsen.io/?framework=vanilla&category=reference&module=tabbar -->
+
 <body>
-<!--
-    http://wp.tech-style.info/archives/742#LocalStorage　　ローカルストレージ
-    https://tutorial.onsen.io/?framework=vanilla&category=reference&module=tabbar
-　　から動かしたいサンプルを探したら、
-　　1.HTMLを下の部分に貼り付ける
-　　2.<template>は<ons-template>に訂正する
-　　3.Javascriptはtest1.jsに貼り付ける
--->
-<!----------------------------- ここより↓ -------------------------------->    
 
 <ons-navigator id="appNavigator" swipeable swipe-target-width="80px">
   <ons-page>
@@ -38,14 +34,14 @@
         <ons-toolbar>
   <div class="center">Home</div>
     <div class="right">
-    <ons-toolbar-button onclick="fn.pushPage({'id': 'add_to.html', 'title': 'add_to'}, 'slide')">
+    <ons-toolbar-button style="font-size: 18px" onclick="fn.pushPage({'id': 'add_to.html', 'title': 'add_to'}, 'slide')">
     追加</ons-toolbar-button>
     </div>
     </ons-toolbar>
         <ons-tabbar swipeable id="appTabbar" position="auto">
             <ons-tab label="Home" icon="ion-home" page="home.html" active></ons-tab>
             <ons-tab label="設定" icon="ion-gear-b" page="setting.html"></ons-tab>
-            <ons-tab label="トレーニング" icon="ion-" page="training.html"></ons-tab>
+            <ons-tab label="トレーニング" icon="ion-flag" page="training.html"></ons-tab>
           </ons-tabbar>
         </ons-page>
       </ons-splitter-content>
@@ -56,95 +52,80 @@
 <ons-template id="home.html">
   <ons-page id="home">
   
-  <div id="view_clock"></div>  
+  <div id="view_clock"></div>
+  <div id="user_name">User name</div>
+  <div id="sun"></div>
  
     <ons-card onclick="fn.pushPage({'id': 'weight_log1.html', 'title': 'weight_log1'},'slide')">
       <div id="home1">
-      <div class="block_1">
-        年齢<div id="nowage"></div><hr />
+      <div class="inline-block_1">
+        <div id="nowage">年齢</div><hr/>
       </div>
-      <div class="block_2">
-        性別<div id="sex"></div><hr />
+      <div class="inline-block_2">
+        <div id="sex_out">性別</div><hr/>
+      </div>
+      <div class="inline-block_3">
+        <div id="wei_out"></div>
+        <div id="g_wei" style="font-size: 15px;"></div>
+      </div>
+      <div class="inline-block_4">
+        <div id="bmi_out"></div>
       </div>
       </div>
     </ons-card>
     
     <ons-card onclick="fn.pushPage({'id': 'tra_log.html', 'title': 'tra_log'},'slide')">
     <div id="home2">
-      <div class="inline-block_3">
-        腹筋
-        <hr />
-      </div>
-      <div class="inline-block_4">
-        背筋<hr />
-      </div>
       <div class="inline-block_5">
-        スクワット
+        腹筋<hr/>
       </div>
       <div class="inline-block_6">
-        腕立て伏せ<div id="pushco"></div><hr />
+        背筋<div id="back_out">0回</div><hr/>
+      </div>
+      <div class="inline-block_7">
+        スクワット
+      </div>
+      <div class="inline-block_8">
+        腕立て伏せ<div id="push_out">0回</div>
       </div>
       </div>
     </ons-card>
     
-    <style>
-      .intro {
-        text-align: center;
-        padding: 0 20px;
-        margin-top: 40px;
-      }
-
-      ons-card {
-        cursor: pointer;
-        color: #333;
-      }
-
-      .card__title,
-      .card--material__title {
-        font-size: 20px;
-      }
-      
-    </style>
   </ons-page>
 </ons-template>
 
  <ons-template id="setting.html">
   <ons-page id="setting-page">
       <ons-list>
-      
       <ons-list-header><ons-icon icon="user" class="list-item__icon"></ons-icon>
       個人設定</ons-list-header>
       
       <form name="settings" id="settings">
-      　名前：<input id="name" type="text" name="txtb" value=""><br>
       
-      　年齢：<input id="age" type="number" class="text-input" value=""><br>
-    
-    　性別： <label><input id="sex1" type="radio" name="radio_test" value="男性" onchange="onRadioButtonChange();" />男性</label>
-     <label><input id="sex2" type="radio" name="radio_test" value="女性" onchange="onRadioButtonChange();" />女性</label>
-     <label><input id="sex3" type="radio" name="radio_test" value="その他" onchange="onRadioButtonChange();" />その他</label><br>
-     
+      <div class="text">　名前：<input id="name" type="text" class="text-input"></div>
+      <div class="text">　年齢：<input id="age" type="number" class="text-input"></div>
+      <div class="text">　性別： <label><input id="sex1" name="sex_in" type="radio" value="男性" />男性</label>
+      <label><input id="sex2" name="sex_in" type="radio" value="女性" />女性</label>
+      <label><input id="sex3" name="sex_in" type="radio" value="その他" />その他</label></div>
+      <div class="text">　身長：<input id="height" type="number" class="text-input" value=""></div>
+      <center><input id="set1" type="button" value="登録" onclick="onButtonClick();" /></center>
+          　
+      </form>
       
-      　身長：<input id="height" type="number" class="text-input" value=""><br>
-      
-      
-      <ons-list-header><ons-icon icon="md-face" class="list-item__icon"></ons-icon>
+      <ons-list-header><ons-icon icon="fa-trophy" class="list-item__icon"></ons-icon>
       目標設定</ons-list-header>
       
-      　体重：<input id="weight" type="number" class="text-input"value=""><br>
-    
-    　腹筋：<input id="sit_up" type="number" class="text-input"value=""><br>
-    
-    　背筋：<input id="back_ex" type="number" class="text-input"value=""><br>
-    
-    　ｽｸﾜｯﾄ：<input id="squat" type="number" class="text-input"value=""><br>
-    
-    　腕立伏せ：<input id="push_up" type="number" class="text-input" value=""><br>
-    　
-    　<input id="set" type="button" value="保存" onclick="onButtonClick();" />
-    　</form>
-    　
-      </ons-list-item>
+      <form>
+      
+      <div class="text">　体重：<input id="weight" type="number" class="text-input"></div>
+      <div class="text">　腹筋：<input id="sit_up" type="number" class="text-input"></div>
+      <div class="text">　背筋：<input id="back_ex" type="number" class="text-input"></div>
+      <div class="text">　ｽｸﾜｯﾄ：<input id="squat" type="number" class="text-input"></div>
+      <div class="text">　腕立伏せ：<input id="push_up" type="number" class="text-input" ></div>
+      <center><input id="set2" type="button" value="保存" onclick="onButtonClick2();" /></center>
+          　
+      </form>
+          
       </ons-list>
    
   </ons-page>
@@ -153,18 +134,18 @@
 <ons-template id="training.html">
   <ons-page id="training">
     <ons-list>
-      <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app1.html', 'title': 'slide'}, 'slide')">
-        腹筋　<div id="sit"></div>
-      </ons-list-item>
-      <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app2.html', 'title': 'slide'}, 'slide')">
-        背筋　<div id="back"></div>
-      </ons-list-item>
-      <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app3.html', 'title': 'slide'}, 'slide')">
-        スクワット　<div id="squ"></div>
-      </ons-list-item>
-      <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app4.html', 'title': 'slide'}, 'slide')">
-        腕立て伏せ　<div id="push"></div>
-      </ons-list-item>
+    <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app1.html', 'title': 'slide'}, 'slide')">
+    腹筋　<div id="sit" style="font-size:12px;"></div>
+    </ons-list-item>
+    <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app2.html', 'title': 'slide'}, 'slide')">
+    背筋　<div id="back" style="font-size:12px;"></div>
+    </ons-list-item>
+    <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app3.html', 'title': 'slide'}, 'slide')">
+    スクワット　<div id="squ" style="font-size:12px;"></div>
+    </ons-list-item>
+    <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app4.html', 'title': 'slide'}, 'slide')">
+    腕立て伏せ　<div id="push" style="font-size:12px;"></div>
+</ons-list-item>
     </ons-list>
   </ons-page>
 </ons-template>
@@ -177,7 +158,7 @@
       </div>
       <div class="center">グラフ</div>
       <div class="right">
-        <ons-toolbar-button onclick="fn.pushPage({'id': 'weight_log2.html', 'title': 'weight_log2'})">
+        <ons-toolbar-button style="font-size: 18px" onclick="fn.pushPage({'id': 'weight_log2.html', 'title': 'weight_log2'})">
         データ</ons-toolbar-button>
         </div>
     </ons-toolbar>
@@ -209,39 +190,26 @@
       <div class="center">データ</div>
     </ons-toolbar>
     
-    <section data-role="content">
-            <ul id="wei" data-role="listview" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
-            </ul>
-        </section>
-        <!-- <div id="wei"></div> -->
+    <table id="wei_table" border=1>
+    <tr><th>日付</th><th>体重</th><th>BMI</th></tr>
+    </table>
     
   </ons-page>
 </ons-template>
 
 <ons-template id="tra_log.html">
-  <ons-page>
+  <ons-page id="tra_log">
     <ons-toolbar>
       <div class="left">
         <ons-back-button>戻る</ons-back-button>
       </div>
-      <div class="center"></div>
+      <div class="center">データ</div>
     </ons-toolbar>
-
-   <div class="button-bar" style="width:280px;margin:0 auto; margin-top: 20px;">
-  <div class="button-bar__item">
-    <input type="radio" name="segment-a" checked>
-    <button class="button-bar__button">1週間</button>
-  </div>
-  <div class="button-bar__item">
-    <input type="radio" name="segment-a">
-    <button class="button-bar__button">1ヶ月</button>
-  </div>
-  <div class="button-bar__item">
-    <input type="radio" name="segment-a">
-    <button class="button-bar__button">1年</button>
-  </div>
-</div>
-   
+    
+    <table id="tra_table" border=1>
+    <tr><th>日付</th><th>腹筋</th><th>背筋</th><th>ｽｸﾜｯﾄ</th><th>腕立て</th></tr>
+    </table>
+    
   </ons-page>
 </ons-template>
 
@@ -252,6 +220,9 @@
         <ons-back-button>戻る</ons-back-button>
       </div>
       <div class="center">腹筋</div>
+      <div class="right">
+      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      </div>
     </ons-toolbar>
   <div class="counter">
         <img src="img/no_00.png" width="55" class="counter-digit">
@@ -259,13 +230,11 @@
         <img src="img/no_00.png" width="55" class="counter-digit">
         <img src="img/no_00.png" width="55" class="counter-digit">
      </div>
-    <div class="trainer">
-    <img src="img/sit_up.png" height="150" alt="sit_up">
-    </div>
-    <div class="reset-buttonx-wrapper">
-     <button class="reset-button"><img src="img/T_save.png" width="320"></button>
-    </div>
-    <button class="count-button"><img src="img/start.png" width="320"></button>
+     <div class="trainer">
+     <img src="img/sit_up.png" height="80" alt="sit_up">
+     </div>
+    
+    <button class="count-button"><img src="img/start.png" width="95%"></button>
     
  </ons-page>
 </ons-template>
@@ -277,6 +246,9 @@
         <ons-back-button>戻る</ons-back-button>
       </div>
       <div class="center">背筋</div>
+      <div class="right">
+      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      </div>
     </ons-toolbar>
   <div class="counter">
         <img src="img/no_00.png" width="55" class="counter-digit">
@@ -284,13 +256,11 @@
         <img src="img/no_00.png" width="55" class="counter-digit">
         <img src="img/no_00.png" width="55" class="counter-digit">
      </div>
-    <div class="trainer">
-    <img src="img/back.png" width="330" alt="back_ex">
-    </div>
-    <div class="reset-buttonx-wrapper">
-     <button class="reset-button"><img src="img/T_save.png" width="320"></button>
-    </div>
-    <button class="count-button"><img src="img/T_count.png" width="320"></button>
+     <div class="trainer">
+     <img src="img/back.png" width="150" alt="back_ex">
+     </div>
+   
+    <button class="count-button"><img src="img/T_count.png" width="95%"></button>
     
  </ons-page>
 </ons-template>
@@ -302,6 +272,9 @@
         <ons-back-button>戻る</ons-back-button>
       </div>
       <div class="center">スクワット</div>
+      <div class="right">
+      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      </div>
     </ons-toolbar>
   <div class="counter">
         <img src="img/no_00.png" width="55" class="counter-digit">
@@ -309,13 +282,11 @@
         <img src="img/no_00.png" width="55" class="counter-digit">
         <img src="img/no_00.png" width="55" class="counter-digit">
      </div>
-    <div class="trainer">
-    <img src="img/squ.png" height="150" alt="squ">
-    </div>
-    <div class="reset-buttonx-wrapper">
-     <button class="reset-button"><img src="img/T_save.png" width="320"></button>
-    </div>
-    <button class="count-button"><img src="img/start.png" width="320"></button>
+     <div class="trainer">
+     <img src="img/squ.png" height="80" alt="squ">
+     </div>
+   
+    <button class="count-button"><img src="img/start.png" width="95%"></button>
     
  </ons-page>
 </ons-template>
@@ -327,29 +298,24 @@
         <ons-back-button>戻る</ons-back-button>
       </div>
       <div class="center">腕立て伏せ</div>
+      <div class="right">
+      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      </div>
     </ons-toolbar>
   <div class="counter">
         <img src="img/no_00.png" width="55" class="counter-digit">
         <img src="img/no_00.png" width="55" class="counter-digit">
         <img src="img/no_00.png" width="55" class="counter-digit">
         <img src="img/no_00.png" width="55" class="counter-digit">
-    </div>
-    <div class="trainer">
-    <img src="img/push_up.png" width="300" alt="push_up">
-    </div>
-    <div class="reset-buttonx-wrapper">
-     <button class="reset-button"><img src="img/T_save.png" width="320"></button>
-    </div>
-    <button class="count-button"><img src="img/T_count.png" width="320"></button>
+     </div>
+     <div class="trainer">
+     <img src="img/push_up.png" width="150" alt="push_up">
+     </div>
+    
+    <button class="count-button"><img src="img/T_count.png" width="95%"></button>
     
  </ons-page>
 </ons-template>
-
-<style>
-  ons-splitter-side[animation=overlay] {
-    border-left: 1px solid #bbb;
-  }
-</style>
 
 <ons-template id="add_to.html">
   <ons-page id="add_to">
@@ -357,16 +323,16 @@
       <div class="left">
         <ons-back-button>戻る</ons-back-button>
       </div>
-      <div class="center"></div>
-    </ons-toolbar> 
+      <div class="center">追加</div>
+    </ons-toolbar>
+
     <form>
     <ons-list-item class="input-items">
-        <label class="center"></label>
-       今日の体重：<input id="tweight" type="number" class="text-input"value=""><br>
-       　<input id="set" type="button" value="保存" onclick="todayweight();" />
-     </form>
-      </ons-list-item>
+    <div class="text">今日の体重：<input id="tweight" type="number" class="text-input"value=""></div>
+    </form>
+    </ons-list-item>
+    
+    <center><input id="set_weight" type="button" value="保存" onclick="todayweight();" /></center>
 
-<!----------------------------- ここより↑ -------------------------------->    
 </body>
 </html>
