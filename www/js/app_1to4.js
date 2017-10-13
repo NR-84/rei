@@ -1,4 +1,50 @@
-document.addEventListener("show", function(event) {
+var watchID = null;
+document.addEventListener("backbutton",app1stop , false);
+
+function app1stop() {
+    if(watchID) {
+        navigator.accelerometer.clearWatch(watchID);
+        watchID = null;
+        document.getElementById("app1-sta").disabled = "";
+    }
+}
+
+document.addEventListener("init", function(event) {
+    var page = event.target;
+    
+    if(page.id === "app1") {
+
+        function app1start() {
+            var options = { frequency: 50 }; //0.1秒毎に更新
+            watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+            
+            document.getElementById("app1-sta").disabled = "true";
+            }
+        
+
+        
+        function onSuccess(acceleration) {
+            var element = document.getElementById('accelerometer');
+        
+            element.innerHTML = 'X: ' + acceleration.x + '<br />' +
+                                'Y: ' + acceleration.y + '<br />' +
+                                'Z: ' + acceleration.z + '<br />';
+        }
+        
+        function onError() {
+            console.error('Error!');
+        }
+        
+        $('.start-button').on("click", app1start);
+        $('.stop-button').on("click", app1stop);
+        $('#app1-bac').on("click", app1stop);
+        
+    }
+  
+});
+
+
+document.addEventListener("init", function(event) {
     var page = event.target;
     
     if(page.id === "app2") {　//　背筋カウント
@@ -10,6 +56,7 @@ document.addEventListener("show", function(event) {
         }
          
         function reset() {
+            navigator.vibrate(200)
             if (count > 0 && confirm("リセットしますか？")) {
                 count = 0;
                 update();
@@ -85,7 +132,7 @@ function deleteback(id) {
     }
 }
 
-document.addEventListener("show", function(event) {
+document.addEventListener("init", function(event) {
     var page = event.target;
         
     if(page.id === "app4") {  // 腕立て伏せカウント
@@ -97,6 +144,7 @@ document.addEventListener("show", function(event) {
         }
          
         function reset() {
+            navigator.vibrate(200)
             if (count2 > 0 && confirm("リセットしますか？")) {
                 count2 = 0;
                 update();

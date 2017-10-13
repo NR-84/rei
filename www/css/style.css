@@ -146,8 +146,36 @@ button:active {
 .count-button {
     margin-top: 5px;
 }
-.count-button:active, .save-button:active, .reset-button:active{
+.count-button:active, .start-button:active, .stop-button:active, .reset-button:active{
     opacity: 0.4;
+}
+
+.start-button:disabled {
+    opacity: 0.4;
+}
+
+#app1-sta {
+    width: 95%;
+    height: 50px;
+    background-color: #A5DF00;
+    font-size: 30px;
+    font-family: Times New Roman;
+    color: #FAFAFA;
+    text-shadow: 2px 2px 1px #999999;
+}
+
+#app1-sto {
+    width: 95%;
+    height: 50px;
+    background-color: #FFBF00;
+    font-size: 30px;
+    font-family: Times New Roman;
+    color: #FAFAFA;
+    text-shadow: 2px 2px 1px #999999;
+}
+
+.reset-button {
+    margin-top: 5px;
 }
 
 #wei_table {

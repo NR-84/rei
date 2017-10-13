@@ -15,7 +15,7 @@
 
   <script src="js/test1.js"></script>
   <script src="js/wlist.js"></script>
-  <script src="js/back.js"></script>
+  <script src="js/app_1to4.js"></script>
   <script src="js/training.js"></script>
   <!--<script src="js/backup.js"></script>-->
   <script>
@@ -54,7 +54,6 @@
   
   <div id="view_clock"></div>
   <div id="user_name">User name</div>
-  <div id="sun"></div>
  
     <ons-card onclick="fn.pushPage({'id': 'weight_log1.html', 'title': 'weight_log1'},'slide')">
       <div id="home1">
@@ -138,7 +137,7 @@
     腹筋　<div id="sit" style="font-size:12px;"></div>
     </ons-list-item>
     <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app2.html', 'title': 'slide'}, 'slide')">
-    背筋　<div id="back" style="font-size:12px;"></div>
+    背筋　<div id="back" style="font-size:12px; border-top:3px;"></div>
     </ons-list-item>
     <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app3.html', 'title': 'slide'}, 'slide')">
     スクワット　<div id="squ" style="font-size:12px;"></div>
@@ -214,14 +213,14 @@
 </ons-template>
 
 <ons-template id="app1.html">
-  <ons-page>
+  <ons-page id="app1">
    <ons-toolbar>
       <div class="left">
-        <ons-back-button>戻る</ons-back-button>
+        <ons-back-button id="app1-bac">戻る</ons-back-button>
       </div>
       <div class="center">腹筋</div>
       <div class="right">
-      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      <button class="reset-button"><img src="img/reset_button.png" height="40px"></button>
       </div>
     </ons-toolbar>
   <div class="counter">
@@ -233,8 +232,9 @@
      <div class="trainer">
      <img src="img/sit_up.png" height="80" alt="sit_up">
      </div>
-    
-    <button class="count-button"><img src="img/start.png" width="95%"></button>
+    <div id="accelerometer">Waiting for accelerometer...</div>
+    <center><input type="button" id="app1-sta" value="Start" class="start-button"/></center>
+    <center><input type="button" id="app1-sto" value="Stop" class="stop-button"/></center>
     
  </ons-page>
 </ons-template>
@@ -247,7 +247,7 @@
       </div>
       <div class="center">背筋</div>
       <div class="right">
-      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      <button class="reset-button"><img src="img/reset_button.png" height="40px"></button>   
       </div>
     </ons-toolbar>
   <div class="counter">
@@ -273,7 +273,7 @@
       </div>
       <div class="center">スクワット</div>
       <div class="right">
-      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      <button class="reset-button"><img src="img/reset_button.png" height="40px"></button>   
       </div>
     </ons-toolbar>
   <div class="counter">
@@ -286,7 +286,8 @@
      <img src="img/squ.png" height="80" alt="squ">
      </div>
    
-    <button class="count-button"><img src="img/start.png" width="95%"></button>
+    <button class="start-button"><img src="img/start.png" width="95%"></button>
+    <button class="stop-button"><img src="img/stop.png" width="95%"></button>
     
  </ons-page>
 </ons-template>
@@ -299,7 +300,7 @@
       </div>
       <div class="center">腕立て伏せ</div>
       <div class="right">
-      <button class="reset-button"><img src="img/reset_button.png" width="40px"></button>   
+      <button class="reset-button"><img src="img/reset_button.png" height="40px"></button>
       </div>
     </ons-toolbar>
   <div class="counter">

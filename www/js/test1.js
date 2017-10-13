@@ -43,7 +43,6 @@ document.addEventListener("show", function(event) {
     
     if(page.id === "home") {
          
-        document.getElementById("sun").textContent = localStorage.getItem("bac_list")
         document.getElementById("user_name").textContent = localStorage.getItem("name");
         document.getElementById("nowage").textContent = "年齢："+localStorage.getItem("age")+"歳";
         document.getElementById("sex_out").textContent = "性別："+localStorage.getItem("sex");
