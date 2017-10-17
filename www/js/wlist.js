@@ -1,21 +1,21 @@
-function todayweight() {
+function todayWeight() {
     var wtext = $("#tweight").val();
         
     if (wtext != '') {
-        deletweight(time);
-        addweight(wtext);
+        deletWeight(time);
+        addWeight(wtext);
         $("#tweight").val("");
     }
 }
 
-function addweight(wtext) {
-    var wlist = getweightlist();
+function addWeight(wtext) {
+    var wlist = getWeightList();
      
     wlist.push({id: time, weight: wtext});
-    saveweightlist(wlist);
+    saveWeightList(wlist);
 }
 
-function getweightlist() {
+function getWeightList() {
     var wlist = localStorage.getItem("wei_list");
     if (wlist == null) {
         return new Array();
@@ -24,7 +24,7 @@ function getweightlist() {
     }
 }
 
-function saveweightlist(wlist) {
+function saveWeightList(wlist) {
     try {
         localStorage.setItem("wei_list", JSON.stringify(wlist));
     } catch (e) {
@@ -33,46 +33,46 @@ function saveweightlist(wlist) {
     }
 }
 
-function deletweight(id) {
-    var wlist = getweightlist();
+function deletWeight(id) {
+    var wlist = getWeightList();
     for (var w in wlist) {
         if (wlist[w].id == id) {
             wlist.splice(w, 1);
-            saveweightlist(wlist);
+            saveWeightList(wlist);
             break;
         }       
     }
 }
 
 function onReady() {
-    $("#todayweight").click(todayweight);
+    $("#todayWeight").click(todayWeight);
 }
 
 $(onReady);
 
-document.addEventListener("show", function(event) {
-        var page = event.target; 
-        if(page.id === "weight_log2") {
+document.addEventListener("init", function(event) {
+    var page = event.target; 
+    if(page.id === "weight_log2") {
+        
+        var wlist = getWeightList();
+        for (var w in wlist) {
+            var memo = wlist[w];
+            console.log(JSON.stringify(memo,null,'\t'));
             
-            var wlist = getweightlist();
-            for (var w in wlist) {
-                var memo = wlist[w];
-                console.log(JSON.stringify(memo,null,'\t'));
-                
-                var table = document.getElementById("wei_table");
-                var tr = table.insertRow(1);
-                var td1 = tr.insertCell(-1),
-                    td2 = tr.insertCell(-1),
-                    td3 = tr.insertCell(-1);
-                var tag1 = memo.id,
-                    tag2 = memo.weight +"kg",
-                    tag3 = ((memo.weight)/(localStorage.getItem("height")*localStorage.getItem("height")*0.0001));
-                var row_len = table.rows.length;
-                
-                td1.id = memo.id;
-                td1.innerHTML = tag1;
-                td2.innerHTML = tag2;
-                td3.innerHTML = tag3.toFixed(2);
-            }
+            var table = document.getElementById("wei_table");
+            var tr = table.insertRow(1);
+            var td1 = tr.insertCell(-1),
+                td2 = tr.insertCell(-1),
+                td3 = tr.insertCell(-1);
+            var tag1 = memo.id,
+                tag2 = memo.weight +"kg",
+                tag3 = ((memo.weight)/(localStorage.getItem("height")*localStorage.getItem("height")*0.0001));
+            var row_len = table.rows.length;
+            
+            td1.id = memo.id;
+            td1.innerHTML = tag1;
+            td2.innerHTML = tag2;
+            td3.innerHTML = tag3.toFixed(2);
         }
+    }
 });
