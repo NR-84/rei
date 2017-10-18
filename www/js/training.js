@@ -1,11 +1,11 @@
 document.addEventListener("init", function(event) {
-    var page = event.target; 
+    var page = event.target;
         
     if(page.id === "tra_log") {
         
-        var silist = getsitlist();
-        var blist = getbacklist();
-        var plist = getpushlist();
+        var silist = getSitList();
+        var blist = getBackList();
+        var plist = getPushList();
         var d = new Date();
         
         for( var i=0; i<7; i++ ){
@@ -16,9 +16,10 @@ document.addEventListener("init", function(event) {
             var memo2 = null;
             var memo3 = null;
             var memo4 = null;
-            var sigoal = localStorage.getItem("sit_up");
-            var bgoal = localStorage.getItem("back_ex");
-            var pgoal = localStorage.getItem("push_up");
+            var sigoal = localStorage.getItem("sitUpGoalKey");
+            var bgoal = localStorage.getItem("backExtensionGoalKey");
+            var squgoal = localStorage.getItem("squatGoalKey");
+            var pgoal = localStorage.getItem("pushUpGoalKey");
             var siox;
             var box;
             var pox;
@@ -117,4 +118,5 @@ document.addEventListener("init", function(event) {
             
         }
     }
+    
 });

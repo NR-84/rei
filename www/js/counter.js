@@ -1,7 +1,7 @@
 document.addEventListener("init", function(event) {
     var page = event.target;
     
-    if(page.id === "situp_counter") {
+    if(page.id === "sitUpCounter") {
         var sitUpCount = 0;
         var state = 0;
         
@@ -41,11 +41,11 @@ document.addEventListener("init", function(event) {
         
         function load() {
             sitUpCount = 0;
-            var silist = getSitList();
-            for (var si in silist) {
-                if (silist[si].id == time) {
-                    var memo4 = silist[si];
-                    sitUpCount = memo4.sicount;
+            var sitUpCountList = getSitList();
+            for (var sitUpCountVariable in sitUpCountList) {
+                if (sitUpCountList[sitUpCountVariable].id == time) {
+                    var sitUpCountElement = sitUpCountList[sitUpCountVariable];
+                    sitUpCount = sitUpCountElement.sicount;
                     break;
                 }
             }
@@ -71,7 +71,7 @@ document.addEventListener("init", function(event) {
         update();
     }
     
-    if(page.id === "backextension_counter") {　//　背筋カウント
+    if(page.id === "backExtensionCounter") {　//　背筋カウント
        
         var backExtensionCount = 0;
         function increment() {
@@ -89,11 +89,11 @@ document.addEventListener("init", function(event) {
         
         function load() {
             backExtensionCount = 0;
-            var blist = getBackList();
-            for (var b in blist) {
-                if (blist[b].id == time) {
-                    var memo2 = blist[b];
-                    backExtensionCount = memo2.bcount;
+            var backExtensionCountList = getBackList();
+            for (var backExtensionCountVariable in backExtensionCountList) {
+                if (backExtensionCountList[backExtensionCountVariable].id == time) {
+                    var backExtensionCountElement = backExtensionCountList[backExtensionCountVariable];
+                    backExtensionCount = backExtensionCountElement.bcount;
                     break;
                 }
             }
@@ -119,7 +119,7 @@ document.addEventListener("init", function(event) {
     
     }
     
-    if(page.id === "squat_counter") {
+    if(page.id === "squatCounter") {
         var squatCount = 0;
         var state = 0;
         
@@ -135,16 +135,15 @@ document.addEventListener("init", function(event) {
             var element = document.getElementById('accelerometer_squat');
             
             element.innerHTML = 'Y: ' + acceleration.y / 9.8066 ;
-            
-        }
         
-        if(state == 0 && (acceleration.y / 9.80665) > 0.9) {
+        if(state == 0 && (acceleration.y / 9.80665) > 1.3) {
                 state = 1;
-                sitUpCount++
+                squatCount++
                 update();
-            }else if(state == 1 && (acceleration.y / 9.80665) < 0.3) {
+            }else if(state == 1 && (acceleration.y / 9.80665) < 0.7) {
                 state = 0;
             }
+        }
         
         function onError() {
             console.error('Error!');
@@ -160,11 +159,11 @@ document.addEventListener("init", function(event) {
         
         function load() {
             squatCount = 0;
-            var silist = getSquatList();
-            for (var squ in squlist) {
-                if (silist[squ].id == time) {
-                    var memo5 = squlist[squ];
-                    squatCount = memo5.squcount;
+            var squatCountList = getSquatList();
+            for (var squatCountVariable in squatCountList) {
+                if (squatCountList[squatCountVariable].id == time) {
+                    var squatCountElement = squatCountList[squatCountVariable];
+                    squatCount = squatCountElement.squcount;
                     break;
                 }
             }
@@ -185,10 +184,13 @@ document.addEventListener("init", function(event) {
         $('.start-button').on("click", squatStart);
         $('.stop-button').on("click", squatStop);
         $('#squat_back').on("click", squatStop);
+        $('.reset-button').on("click", reset);
+        load();
+        update();
 
     }
     
-     if(page.id === "pushup_counter") {  // 腕立て伏せカウント
+     if(page.id === "pushUpCounter") {  // 腕立て伏せカウント
            
         var pushUpCount = 0;
         function increment() {
@@ -206,11 +208,11 @@ document.addEventListener("init", function(event) {
         
         function load() {
             pushUpCount = 0;
-            var plist = getPushList();
-            for (var p in plist) {
-                if (plist[p].id == time) {
-                    var memo3 = plist[p];
-                    pushUpCount = memo3.pcount;
+            var pushUpCountList = getPushList();
+            for (var pushUpCountVariable in pushUpCountList) {
+                if (pushUpCountList[pushUpCountVariable].id == time) {
+                    var pushUpCountElement = pushUpCountList[pushUpCountVariable];
+                    pushUpCount = pushUpCountElement.pcount;
                 }
             }
         }
@@ -248,24 +250,24 @@ function sitUpStop() {
 }
 
 function addSit(sitUpCount) {
-    var silist = getSitList();
+    var sitUpCountList = getSitList();
      
-    silist.push({id: time, sicount: sitUpCount});
-    saveSitList(silist);
+    sitUpCountList.push({id: time, sicount: sitUpCount});
+    saveSitList(sitUpCountList);
 }
 
 function getSitList() {
-    var silist = localStorage.getItem("sit_list");
-    if (silist == null) {
+    var sitUpCountList = localStorage.getItem("sitUpCountKey");
+    if (sitUpCountList == null) {
         return new Array();
     } else {
-        return JSON.parse(silist);
+        return JSON.parse(sitUpCountList);
     }
 }
 
-function saveSitList(silist) {
+function saveSitList(sitUpCountList) {
     try {
-        localStorage.setItem("sit_list", JSON.stringify(silist));
+        localStorage.setItem("sitUpCountKey", JSON.stringify(sitUpCountList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;
@@ -273,35 +275,35 @@ function saveSitList(silist) {
 }
 
 function deleteSit(id) {
-    var silist = getSitList();
-    for (var si in silist) {
-        if (silist[si].id == id) {
-            silist.splice(si, 1);
-            saveSitList(silist);
+    var sitUpCountList = getSitList();
+    for (var si in sitUpCountList) {
+        if (sitUpCountList[si].id == id) {
+            sitUpCountList.splice(si, 1);
+            saveSitList(sitUpCountList);
             break; 
         }
     }
 }
     
 function addBack(backExtensionCount) {
-    var blist = getBackList();
+    var backExtensionCountList = getBackList();
      
-    blist.push({id: time, bcount: backExtensionCount});
-    saveBackList(blist);
+    backExtensionCountList.push({id: time, bcount: backExtensionCount});
+    saveBackList(backExtensionCountList);
 }
 
 function getBackList() {
-    var blist = localStorage.getItem("bac_list");
-    if (blist == null) {
+    var backExtensionCountList = localStorage.getItem("backExtensionCountKey");
+    if (backExtensionCountList == null) {
         return new Array();
     } else {
-        return JSON.parse(blist);
+        return JSON.parse(backExtensionCountList);
     }
 }
 
-function saveBackList(blist) {
+function saveBackList(backExtensionCountList) {
     try {
-        localStorage.setItem("bac_list", JSON.stringify(blist));
+        localStorage.setItem("backExtensionCountKey", JSON.stringify(backExtensionCountList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;
@@ -309,11 +311,11 @@ function saveBackList(blist) {
 }
 
 function deleteBack(id) {
-    var blist = getBackList();
-    for (var b in blist) {
-        if (blist[b].id == id) {
-            blist.splice(b, 1);
-            saveBackList(blist);
+    var backExtensionCountList = getBackList();
+    for (var b in backExtensionCountList) {
+        if (backExtensionCountList[b].id == id) {
+            backExtensionCountList.splice(b, 1);
+            saveBackList(backExtensionCountList);
             break; 
         }
     }
@@ -329,25 +331,25 @@ function squatStop() {
     }
 }
 
-function addSquat(sitUpCount) {
-    var squlist = getSquatList();
+function addSquat(squatCount) {
+    var squatCountList = getSquatList();
      
-    squlist.push({id: time, squcount: squatCount});
-    saveSquatList(squlist);
+    squatCountList.push({id: time, squcount: squatCount});
+    saveSquatList(squatCountList);
 }
 
 function getSquatList() {
-    var squlist = localStorage.getItem("squat_list");
-    if (squlist == null) {
+    var squatCountList = localStorage.getItem("squatCountKey");
+    if (squatCountList == null) {
         return new Array();
     } else {
-        return JSON.parse(squlist);
+        return JSON.parse(squatCountList);
     }
 }
 
-function saveSquatList(silist) {
+function saveSquatList(squatCountList) {
     try {
-        localStorage.setItem("squat_list", JSON.stringify(squlist));
+        localStorage.setItem("squatCountKey", JSON.stringify(squatCountList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;
@@ -355,35 +357,35 @@ function saveSquatList(silist) {
 }
 
 function deleteSquat(id) {
-    var squlist = getSquatList();
-    for (var squ in squlist) {
-        if (squlist[squ].id == id) {
-            squlist.splice(squ, 1);
-            saveSquatList(squlist);
+    var squatCountList = getSquatList();
+    for (var squ in squatCountList) {
+        if (squatCountList[squ].id == id) {
+            squatCountList.splice(squ, 1);
+            saveSquatList(squatCountList);
             break; 
         }
     }
 }
     
 function addPush(pushUpCount) {
-    var plist = getPushList();
+    var pushUpCountList = getPushList();
      
-    plist.push({id: time, pcount: pushUpCount});
-    savePushList(plist);
+    pushUpCountList.push({id: time, pcount: pushUpCount});
+    savePushList(pushUpCountList);
 }
 
 function getPushList() {
-    var plist = localStorage.getItem("pus_list");
-    if (plist == null) {
+    var pushUpCountList = localStorage.getItem("pushUpCountKey");
+    if (pushUpCountList == null) {
         return new Array();
     } else {
-        return JSON.parse(plist);
+        return JSON.parse(pushUpCountList);
     }
 }
 
-function savePushList(plist) {
+function savePushList(pushUpCountList) {
     try {
-        localStorage.setItem("pus_list", JSON.stringify(plist));
+        localStorage.setItem("pushUpCountKey", JSON.stringify(pushUpCountList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;
@@ -391,11 +393,11 @@ function savePushList(plist) {
 }
 
 function deletePush(id) {
-    var plist = getPushList();
-    for (var p in plist) {
-        if (plist[p].id == id) {
-            plist.splice(p, 1);
-            savePushList(plist);
+    var pushUpCountList = getPushList();
+    for (var p in pushUpCountList) {
+        if (pushUpCountList[p].id == id) {
+            pushUpCountList.splice(p, 1);
+            savePushList(pushUpCountList);
             break; 
         }
     }

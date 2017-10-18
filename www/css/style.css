@@ -106,20 +106,6 @@ body {
     color: rgba(255,255,255,1);
 }
 
-#app2 .page__background {
-    background: #FFFFF;
-    background-size: cover;
-    color: white;
-    text-align: center;
-}
-
-#app4 .page__background {
-    background: #FFFFF;
-    background-size: cover;
-    color: white;
-    text-align: center;
-}
-
 .trainer {
     margin-top: 10%;
     
@@ -150,7 +136,7 @@ button:active {
     opacity: 0.4;
 }
 
-#app1-sta, #app3-sta {
+#situp_start, #squat_start {
     width: 95%;
     height: 50px;
     background-color: #A5DF00;
@@ -160,7 +146,7 @@ button:active {
     text-shadow: 2px 2px 1px #999999;
 }
 
-#app1-sto #app3-sto{
+#situp_stop,#squat_stop {
     width: 95%;
     height: 50px;
     background-color: #FFBF00;

@@ -52,22 +52,22 @@
   <ons-page id="home">
   
   <div id="view_clock"></div>
-  <div id="user_name">User name</div>
+  <div id="userName">User name</div>
 
     <ons-card onclick="fn.pushPage({'id': 'weight_log1.html', 'title': 'weight_log1'},'slide')">
       <div id="home1">
       <div class="inline-block_1">
-        <div id="nowage">年齢</div><hr/>
+        <div id="ageOutput">年齢</div><hr/>
       </div>
       <div class="inline-block_2">
-        <div id="sex_out">性別</div><hr/>
+        <div id="sexOutput">性別</div><hr/>
       </div>
       <div class="inline-block_3">
-        <div id="wei_out"></div>
+        <div id="weightOutput"></div>
         <div id="g_wei" style="font-size: 14px;"></div>
       </div>
       <div class="inline-block_4">
-        <div id="bmi_out"></div>
+        <div id="bmiOutput"></div>
       </div>
       </div>
     </ons-card>
@@ -75,16 +75,16 @@
     <ons-card onclick="fn.pushPage({'id': 'tra_log.html', 'title': 'tra_log'},'slide')">
     <div id="home2">
       <div class="inline-block_5">
-        腹筋<div id="sit_out">0回</div><hr/>
+        腹筋<div id="sitOutput">0回</div><hr/>
       </div>
       <div class="inline-block_6">
-        背筋<div id="back_out">0回</div><hr/>
+        背筋<div id="backExtensionOutput">0回</div><hr/>
       </div>
       <div class="inline-block_7">
-        スクワット<div id="squ_out">0回</div>
+        スクワット<div id="squatOutput">0回</div>
       </div>
       <div class="inline-block_8">
-        腕立て伏せ<div id="push_out">0回</div>
+        腕立て伏せ<div id="pushUpOutput">0回</div>
       </div>
       </div>
     </ons-card>
@@ -99,32 +99,30 @@
       個人設定</ons-list-header>
       
       <form name="settings" id="settings">
-      
-      <div class="text">　名前：<input id="name" type="text" class="text-input"></div>
-      <div class="text">　年齢：<input id="age" type="number" class="text-input"></div>
+      <div class="text">　名前：<input id="nameInput" type="text" class="text-input"></div>
+      <div class="text">　年齢：<input id="ageInput" type="number" class="text-input"></div>
       <div class="text">　性別：
-      <label><input id="sex1" name="sex_in" type="radio" value="男性"/>男性</label>
-      <label><input id="sex2" name="sex_in" type="radio" value="女性"/>女性</label>
-      <label><input id="sex3" name="sex_in" type="radio" value="その他" />その他</label></div>
-      <div class="text">　身長：<input id="height" type="number" class="text-input"></div>
-      <center><input id="set1" type="button" value="登録" onclick="onButtonClick();" /></center>
-          　
+      <label><input id="sex1" name="sexInput" type="radio" value="男性"/>男性</label>
+      <label><input id="sex2" name="sexInput" type="radio" value="女性"/>女性</label>
+      <label><input id="sex3" name="sexInput" type="radio" value="その他" />その他</label></div>
+      <div class="text">　身長：<input id="heightInput" type="number" class="text-input"></div>
+      <center><input id="set1" type="button" value="登録" onclick="userSetting();" /></center>
       </form>
       
       <ons-list-header><ons-icon icon="fa-trophy" class="list-item__icon"></ons-icon>
       目標設定</ons-list-header>
       
       <form>
-      
-      <div class="text">　体重：<input id="weight" type="number" class="text-input"></div>
-      <div class="text">　腹筋：<input id="sit_up" type="number" class="text-input"></div>
-      <div class="text">　背筋：<input id="back_ex" type="number" class="text-input"></div>
-      <div class="text">　ｽｸﾜｯﾄ：<input id="squat" type="number" class="text-input"></div>
-      <div class="text">　腕立伏せ：<input id="push_up" type="number" class="text-input" ></div>
-      <center><input id="set2" type="button" value="保存" onclick="onButtonClick2();" /></center>
-          　
+      <div class="text">　体重：<input id="weightGoalInput" type="number" class="text-input"></div>
+      <div class="text">　腹筋：<input id="sitUpGoalInput" type="number" class="text-input"></div>
+      <div class="text">　背筋：<input id="backExtensionGoalInput" type="number" class="text-input"></div>
+      <div class="text">　ｽｸﾜｯﾄ：<input id="squtaGoalInput" type="number" class="text-input"></div>
+      <div class="text">　腕立伏せ：<input id="pushUpInput" type="number" class="text-input" ></div>
+      <center><input id="set2" type="button" value="保存" onclick="goalSetting();" /></center>
       </form>
-          
+      
+      <ons-list-header></ons-list-header>
+      <center><input id="delete" type="button" value="全削除" onclick="allDelete();" /></center>
       </ons-list>
    
   </ons-page>
@@ -134,16 +132,16 @@
   <ons-page id="training">
     <ons-list>
     <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'situp_counter.html', 'title': 'slide'}, 'slide')">
-    腹筋　<div id="sit" style="font-size:12px;"></div>
+    腹筋　<div id="sitUpGoalOutput" style="font-size:12px;"></div><br />　
     </ons-list-item>
-    <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'backextension_counter.html', 'title': 'slide'}, 'slide')">
-    背筋　<div id="back" style="font-size:12px;"></div>
+    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'backextension_counter.html', 'title': 'slide'}, 'slide')">
+    背筋　<div id="backExtensionGoalOutput" style="font-size:12px;"></div><br />　
     </ons-list-item>
-    <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'squat_counter.html', 'title': 'slide'}, 'slide')">
-    スクワット　<div id="squ" style="font-size:12px;"></div>
+    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'squat_counter.html', 'title': 'slide'}, 'slide')">
+    スクワット　<div id="squatGoalOutput" style="font-size:12px;"></div><br />　
     </ons-list-item>
-    <ons-list-item modifier="chevron" onclick="fn.pushPage({'id': 'app4.html', 'title': 'slide'}, 'slide')">
-    腕立て伏せ　<div id="push" style="font-size:12px;"></div>
+    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'pushup_counter.html', 'title': 'slide'}, 'slide')">
+    腕立て伏せ　<div id="pushUpGoalOutput" style="font-size:12px;"></div><br />　
 </ons-list-item>
     </ons-list>
   </ons-page>
@@ -212,8 +210,8 @@
   </ons-page>
 </ons-template>
 
-<ons-template id="situp_counter.html">
-  <ons-page id="situp_counter">
+<ons-template id="sitUpCounter.html">
+  <ons-page id="sitUpCounter">
    <ons-toolbar>
       <div class="left">
         <ons-back-button id="situp_back">戻る</ons-back-button>
@@ -239,8 +237,8 @@
  </ons-page>
 </ons-template>
 
-<ons-template id="backextension_counter.html">
-  <ons-page id="backextension_counter">
+<ons-template id="backExtensionCounter.html">
+  <ons-page id="backExtensionCounter">
   <ons-toolbar>
       <div class="left">
         <ons-back-button>戻る</ons-back-button>
@@ -265,8 +263,8 @@
  </ons-page>
 </ons-template>
 
-<ons-template id="squat_counter.html">
-  <ons-page id="squat_counter">
+<ons-template id="squatCounter.html">
+  <ons-page id="squatCounter">
      <ons-toolbar>
       <div class="left">
         <ons-back-button id="squat_back">戻る</ons-back-button>
@@ -286,15 +284,15 @@
      <img src="img/squ.png" height="80" alt="squ">
      </div>
    
-    <div id="accelerometer">Waiting for accelerometer...</div>
+    <div id="accelerometer_squat">Waiting for accelerometer...</div>
     <center><input type="button" id="squat_start" value="Start" class="start-button"/></center>
     <center><input type="button" id="squat_stop" value="Stop" class="stop-button"/></center>
     
  </ons-page>
 </ons-template>
 
-<ons-template id="pushup_counter.html">
-  <ons-page id="pushup_counter">
+<ons-template id="pushUpCounter.html">
+  <ons-page id="pushUpCounter">
   <ons-toolbar>
       <div class="left">
         <ons-back-button>戻る</ons-back-button>
