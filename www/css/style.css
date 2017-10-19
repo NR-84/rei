@@ -10,7 +10,7 @@ body {
     font-size: 20px;
 }
 
-.inline-block_1 {
+.inline-block-1 {
     position: absolute;
     top: 5px;
     left: 0%;
@@ -18,7 +18,7 @@ body {
     text-align: center;
 }
 
-.inline-block_2 {
+.inline-block-2 {
     position: absolute;
     top: 5px;
     right: 0%;
@@ -26,7 +26,7 @@ body {
     text-align: center;
 }
 
-.inline-block_3 {
+.inline-block-3 {
     position: absolute;
     top: 65px;
     left: 0%;
@@ -34,7 +34,7 @@ body {
     text-align: center;
 }
 
-.inline-block_4 {
+.inline-block-4 {
     position: absolute;
     top: 65px;
     right: 0%;
@@ -49,7 +49,7 @@ body {
     font-size: 20px;
 }
 
-.inline-block_5 {
+.inline-block-5 {
     position: absolute;
     top: 5px;
     left: 0%;
@@ -57,7 +57,7 @@ body {
     text-align: center;
 }
 
-.inline-block_6 {
+.inline-block-6 {
     position: absolute;
     top: 5px;
     right: 0%;
@@ -65,7 +65,7 @@ body {
     text-align: center;
 }
 
-.inline-block_7 {
+.inline-block-7 {
     position: absolute;
     top: 95px;
     left: 0%;
@@ -73,7 +73,7 @@ body {
     text-align: center;
 }
 
-.inline-block_8 {
+.inline-block-8 {
     position: absolute;
     top: 95px;
     right: 0%;
@@ -81,7 +81,7 @@ body {
     text-align: center;
 }
 
-#view_clock {
+#viewClock {
     float : center;
     font-size: 14pt;
     text-align: center;
@@ -136,7 +136,7 @@ button:active {
     opacity: 0.4;
 }
 
-#situp_start, #squat_start {
+#sitUpStart, #squatStart {
     width: 95%;
     height: 50px;
     background-color: #A5DF00;
@@ -146,7 +146,7 @@ button:active {
     text-shadow: 2px 2px 1px #999999;
 }
 
-#situp_stop,#squat_stop {
+#sitUpStop,#squatStop {
     width: 95%;
     height: 50px;
     background-color: #FFBF00;

@@ -14,11 +14,14 @@
   <link rel="stylesheet" href="css/navigation-bar.css">
 
   <script src="js/test1.js"></script>
-  <script src="js/wlist.js"></script>
-  <script src="js/counter.js"></script>
-  <script src="js/training.js"></script>
-  <script>
-  </script>
+  <script src="js/weightList.js"></script>
+  <script src="js/sitUp.js"></script>
+  <script src="js/backExtension.js"></script>
+  <script src="js/squat.js"></script>
+  <script src="js/pushUp.js"></script>
+  <script src="js/trainingLog.js"></script>
+  <script src="js/EventListener.js"></script>
+  
 </head>
 
 <!-- https://tutorial.onsen.io/?framework=vanilla&category=reference&module=tabbar -->
@@ -51,22 +54,22 @@
 <ons-template id="home.html">
   <ons-page id="home">
   
-  <div id="view_clock"></div>
+  <div id="viewClock"></div>
   <div id="userName">User name</div>
 
-    <ons-card onclick="fn.pushPage({'id': 'weight_log1.html', 'title': 'weight_log1'},'slide')">
+    <ons-card onclick="fn.pushPage({'id': 'weightGraph.html', 'title': 'weightGraph'},'slide')">
       <div id="home1">
-      <div class="inline-block_1">
+      <div class="inline-block-1">
         <div id="ageOutput">年齢</div><hr/>
       </div>
-      <div class="inline-block_2">
+      <div class="inline-block-2">
         <div id="sexOutput">性別</div><hr/>
       </div>
-      <div class="inline-block_3">
+      <div class="inline-block-3">
         <div id="weightOutput"></div>
-        <div id="g_wei" style="font-size: 14px;"></div>
+        <div id="weightGoalOutput" style="font-size: 14px;"></div>
       </div>
-      <div class="inline-block_4">
+      <div class="inline-block-4">
         <div id="bmiOutput"></div>
       </div>
       </div>
@@ -74,16 +77,16 @@
     
     <ons-card onclick="fn.pushPage({'id': 'tra_log.html', 'title': 'tra_log'},'slide')">
     <div id="home2">
-      <div class="inline-block_5">
-        腹筋<div id="sitOutput">0回</div><hr/>
+      <div class="inline-block-5">
+        腹筋<div id="sitUpOutput">0回</div><hr/>
       </div>
-      <div class="inline-block_6">
+      <div class="inline-block-6">
         背筋<div id="backExtensionOutput">0回</div><hr/>
       </div>
-      <div class="inline-block_7">
+      <div class="inline-block-7">
         スクワット<div id="squatOutput">0回</div>
       </div>
-      <div class="inline-block_8">
+      <div class="inline-block-8">
         腕立て伏せ<div id="pushUpOutput">0回</div>
       </div>
       </div>
@@ -106,7 +109,7 @@
       <label><input id="sex2" name="sexInput" type="radio" value="女性"/>女性</label>
       <label><input id="sex3" name="sexInput" type="radio" value="その他" />その他</label></div>
       <div class="text">　身長：<input id="heightInput" type="number" class="text-input"></div>
-      <center><input id="set1" type="button" value="登録" onclick="userSetting();" /></center>
+      <center><input id="set1" type="button" value="登録" onclick="userSetting();" /></center>　
       </form>
       
       <ons-list-header><ons-icon icon="fa-trophy" class="list-item__icon"></ons-icon>
@@ -116,13 +119,13 @@
       <div class="text">　体重：<input id="weightGoalInput" type="number" class="text-input"></div>
       <div class="text">　腹筋：<input id="sitUpGoalInput" type="number" class="text-input"></div>
       <div class="text">　背筋：<input id="backExtensionGoalInput" type="number" class="text-input"></div>
-      <div class="text">　ｽｸﾜｯﾄ：<input id="squtaGoalInput" type="number" class="text-input"></div>
-      <div class="text">　腕立伏せ：<input id="pushUpInput" type="number" class="text-input" ></div>
-      <center><input id="set2" type="button" value="保存" onclick="goalSetting();" /></center>
+      <div class="text">　ｽｸﾜｯﾄ：<input id="squatGoalInput" type="number" class="text-input"></div>
+      <div class="text">　腕立伏せ：<input id="pushUpGoalInput" type="number" class="text-input" ></div>
+      <center><input id="set2" type="button" value="保存" onclick="goalSetting();" /></center>　
       </form>
       
       <ons-list-header></ons-list-header>
-      <center><input id="delete" type="button" value="全削除" onclick="allDelete();" /></center>
+      <center><input id="delete" type="button" value="全削除" onclick="allDelete();" /></center>　
       </ons-list>
    
   </ons-page>
@@ -131,23 +134,23 @@
 <ons-template id="training.html">
   <ons-page id="training">
     <ons-list>
-    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'situp_counter.html', 'title': 'slide'}, 'slide')">
-    腹筋　<div id="sitUpGoalOutput" style="font-size:12px;"></div><br />　
+    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'sitUpCounter.html', 'title': 'slide'}, 'slide')">
+    腹筋　<div id="sitUpGoalOutpt" style="font-size:12px;"></div><br />　
     </ons-list-item>
-    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'backextension_counter.html', 'title': 'slide'}, 'slide')">
+    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'backExtensionCounter.html', 'title': 'slide'}, 'slide')">
     背筋　<div id="backExtensionGoalOutput" style="font-size:12px;"></div><br />　
     </ons-list-item>
-    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'squat_counter.html', 'title': 'slide'}, 'slide')">
+    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'squatCounter.html', 'title': 'slide'}, 'slide')">
     スクワット　<div id="squatGoalOutput" style="font-size:12px;"></div><br />　
     </ons-list-item>
-    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'pushup_counter.html', 'title': 'slide'}, 'slide')">
+    <ons-list-item class="training" modifier="chevron" onclick="fn.pushPage({'id': 'pushUpCounter.html', 'title': 'slide'}, 'slide')">
     腕立て伏せ　<div id="pushUpGoalOutput" style="font-size:12px;"></div><br />　
 </ons-list-item>
     </ons-list>
   </ons-page>
 </ons-template>
 
-<ons-template id="weight_log1.html">
+<ons-template id="weightGraph.html">
   <ons-page>
     <ons-toolbar>
       <div class="left">
@@ -155,7 +158,7 @@
       </div>
       <div class="center">グラフ</div>
       <div class="right">
-        <ons-toolbar-button style="font-size: 18px" onclick="fn.pushPage({'id': 'weight_log2.html', 'title': 'weight_log2'},'slide')">
+        <ons-toolbar-button style="font-size: 18px" onclick="fn.pushPage({'id': 'weightRecord.html', 'title': 'weightRecord'},'slide')">
         データ</ons-toolbar-button>
         </div>
     </ons-toolbar>
@@ -178,8 +181,8 @@
 </ons-page>
 </ons-template>
 
-<ons-template id="weight_log2.html">
-  <ons-page id="weight_log2">
+<ons-template id="weightRecord.html">
+  <ons-page id="weightRecord">
     <ons-toolbar>
       <div class="left">
         <ons-back-button>戻る</ons-back-button>
@@ -231,8 +234,8 @@
      <img src="img/sit_up.png" height="80" alt="sit_up">
      </div>
     <div id="accelerometer">Waiting for accelerometer...</div>
-    <center><input type="button" id="situp_start" value="Start" class="start-button"/></center>
-    <center><input type="button" id="situp_stop" value="Stop" class="stop-button"/></center>
+    <center><input type="button" id="sitUpStart" value="Start" class="start-button"/></center>
+    <center><input type="button" id="sitUpStop" value="Stop" class="stop-button"/></center>
     
  </ons-page>
 </ons-template>
@@ -285,8 +288,8 @@
      </div>
    
     <div id="accelerometer_squat">Waiting for accelerometer...</div>
-    <center><input type="button" id="squat_start" value="Start" class="start-button"/></center>
-    <center><input type="button" id="squat_stop" value="Stop" class="stop-button"/></center>
+    <center><input type="button" id="squatStart" value="Start" class="start-button"/></center>
+    <center><input type="button" id="squatStop" value="Stop" class="stop-button"/></center>
     
  </ons-page>
 </ons-template>
@@ -325,14 +328,11 @@
       </div>
       <div class="center">追加</div>
     </ons-toolbar>
-
-    <form>
-    <ons-list-item class="input-items">
-    <div class="text">今日の体重：<input id="tweight" type="number" class="text-input"value=""></div>
-    </form>
-    </ons-list-item>
     
+    <form>
+    <div class="text">今日の体重：<input id="tweight" type="number" class="text-input"value=""></div>
     <center><input id="set_weight" type="button" value="保存" onclick="todayWeight();" /></center>
+    </form>
 
 </body>
 </html>
