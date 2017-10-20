@@ -1,6 +1,7 @@
 function onInitTrainingLog() {
     var sitUpCountList = getSitUpList();
     var backExtensionCountList = getBackExtensionList();
+    var squatCountList = getSquatList();
     var pushUpCountList = getPushUpList();
     var d = new Date();
     
@@ -8,34 +9,43 @@ function onInitTrainingLog() {
         var year2 = d.getFullYear();
         var mon2 = d.getMonth()+1;
         var day2 = d.getDate();
-        var time2 = year2 + "/" + mon2 + "/" + day2;
-        var backExtensionCountElement = null;
-        var pushUpCountElement = null;
+        var countID = year2 + "/" + mon2 + "/" + day2;
         var sitUpCountElement = null;
+        var backExtensionCountElement = null;
+        var squatCountElement = null;
+        var pushUpCountElement = null;
         var sigoal = localStorage.getItem("sitUpGoalKey");
         var bgoal = localStorage.getItem("backExtensionGoalKey");
         var squgoal = localStorage.getItem("squatGoalKey");
         var pgoal = localStorage.getItem("pushUpGoalKey");
         var sitUpCheck;
         var backExtensionCheck;
+        var squatCheck;
         var pushUpCheck;
         
         for (var sitUpCountVariable in sitUpCountList) {
-            if (sitUpCountList[sitUpCountVariable].id == time2) {
+            if (sitUpCountList[sitUpCountVariable].id == countID) {
                 var sitUpCountElement = sitUpCountList[sitUpCountVariable];
                 break;
             }
         }
         
         for (var backExtensionCountVariable in backExtensionCountList) {
-            if (backExtensionCountList[backExtensionCountVariable].id == time2) {
+            if (backExtensionCountList[backExtensionCountVariable].id == countID) {
                 var backExtensionCountElement = backExtensionCountList[backExtensionCountVariable];
                  break;
              }
         }
         
+        for (var squatCountVariable in squatCountList) {
+            if (squatCountList[squatCountVariable].id == countID) {
+                var squatCountElement = squatCountList[squatCountVariable];
+                break;
+            }
+        }
+        
         for (var pushUpCountVariable in pushUpCountList) {
-            if (pushUpCountList[pushUpCountVariable].id == time2) {
+            if (pushUpCountList[pushUpCountVariable].id == countID) {
                 var pushUpCountElement = pushUpCountList[pushUpCountVariable];
                 break;
             }
@@ -65,6 +75,18 @@ function onInitTrainingLog() {
             backExtensionCheck = "-";
         }
         
+        if(squatCountElement != null) {
+            if(bgoal == null){
+                squatCheck = "-";
+            } else if(bgoal > squatCountElement.squcount) {
+                squatCheck = "×";
+            } else if(bgoal <= squatCountElement.squcount) {
+                squatCheck = "○";
+            }
+        } else {
+            squatCheck = "-";
+        }
+        
         if(pushUpCountElement != null) {
             if(pgoal == null) {
                 pushUpCheck = "-";
@@ -77,30 +99,19 @@ function onInitTrainingLog() {
             pushUpCheck = "-";
         }
         
-        var table = document.getElementById("tra_table");
+        var table = document.getElementById("trainingTable");
         var tr = table.insertRow(-1);
         var td1 = tr.insertCell(-1),
             td2 = tr.insertCell(-1),
             td3 = tr.insertCell(-1),
             td4 = tr.insertCell(-1),
             td5 = tr.insertCell(-1);
-        var tag1 = time2,
-            tag2 = "",
-            tag3 = "",
-            tag4 = "○",
-            tag5 = "";
-            
-        if(sitUpCountElement != null) {
-            tag2 = sitUpCheck;
-        }
-        
-        if(backExtensionCountElement != null) {
-            tag3 = backExtensionCheck;
-        }
-        
-        if(pushUpCountElement != null) {
+        var tag1 = countID,
+            tag2 = sitUpCheck,
+            tag3 = backExtensionCheck,
+            tag4 = squatCheck,
             tag5 = pushUpCheck;
-        }
+            
     
         var row_len = table.rows.length;
     

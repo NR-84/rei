@@ -1,5 +1,11 @@
 function onInitBackExtension() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
     var backExtensionCount = 0;
+    
     function increment() {
         backExtensionCount++; 
         update();
@@ -28,7 +34,8 @@ function onInitBackExtension() {
     function update() {
         var str = '0000' + backExtensionCount;
         str = str.substring(str.length - 4, str.length);
-        
+
+        var time = year+"/"+mon+"/"+day;
         var digits = $('.counter-digit');
         for (var i = 0; i < str.length; i++) {
             digits.get(i).src = 'img/no_0' + str[i] + '.png'
@@ -46,7 +53,12 @@ function onInitBackExtension() {
 
 function addBackExtension(backExtensionCount) {
     var backExtensionCountList = getBackExtensionList();
-     
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
+    
     backExtensionCountList.push({id: time, bcount: backExtensionCount});
     saveBackExtensionList(backExtensionCountList);
 }

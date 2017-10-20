@@ -2,9 +2,8 @@ function onInitWeightList() {
     var weightRecordList = getWeightList();
     for (var weightRecordVariable in weightRecordList) {
         var weightRecordElement = weightRecordList[weightRecordVariable];
-        console.log(JSON.stringify(weightRecordElement,null,'\t'));
         
-        var table = document.getElementById("wei_table");
+        var table = document.getElementById("weightTable");
         var tr = table.insertRow(1);
         var td1 = tr.insertCell(-1),
             td2 = tr.insertCell(-1),
@@ -30,7 +29,11 @@ function onInitWeightList() {
 
 function todayWeight() {
     var wtext = $("#tweight").val();
-        
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;   
     if (wtext != '') {
         deletWeight(time);
         addWeight(wtext);
@@ -40,6 +43,11 @@ function todayWeight() {
 
 function addWeight(wtext) {
     var weightRecordList = getWeightList();
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
      
     weightRecordList.push({id: time, weight: wtext});
     saveWeightList(weightRecordList);
@@ -70,7 +78,7 @@ function deletWeight(id) {
             weightRecordList.splice(weightRecordVariable, 1);
             saveWeightList(weightRecordList);
             break;
-        }       
+        }   
     }
 }
 
@@ -79,7 +87,3 @@ function deletWeight(id) {
 }
 
 $(onReady);*/
-
-document.addEventListener("init", function(event) {
-
-});

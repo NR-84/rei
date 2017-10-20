@@ -1,4 +1,9 @@
 function onInitSitUp() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
     var sitUpCount = 0;
     var state = 0;
     
@@ -7,7 +12,7 @@ function onInitSitUp() {
         var options = { frequency: 50 }; //0.05秒毎に更新
         watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
         
-        document.getElementById("situp_start").disabled = "true";
+        document.getElementById("sitUpStart").disabled = "true";
         }
     
     function onSuccess(acceleration) {
@@ -75,7 +80,7 @@ function sitUpStop() {
     if(watchID) {
         navigator.accelerometer.clearWatch(watchID);
         watchID = null;
-        document.getElementById("situp_start").disabled = "";
+        document.getElementById("sitUpStart").disabled = "";
     }
 }
 

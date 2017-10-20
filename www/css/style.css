@@ -101,6 +101,10 @@ body {
     width: 100px; 
 }
 
+#weekGraph {
+    
+}
+
 .training:active {
     background-color: rgba(0,0,0,0.4);
     color: rgba(255,255,255,1);
@@ -160,13 +164,7 @@ button:active {
     margin-top: 5px;
 }
 
-#wei_table {
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
-}
-
-#tra_table {
+#weightTable, #trainingTable {
     border-collapse: collapse;
     width: 100%;
     text-align: center;

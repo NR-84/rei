@@ -1,5 +1,11 @@
 function onInitPushUp() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
     var pushUpCount = 0;
+    
     function increment() {
         pushUpCount++; 
         update();

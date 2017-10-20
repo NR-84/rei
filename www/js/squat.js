@@ -1,4 +1,9 @@
 function onInitSquat() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
     var squatCount = 0;
     var state = 0;
     
@@ -7,7 +12,7 @@ function onInitSquat() {
         var options = { frequency: 100 }; //0.05秒毎に更新
         watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
         
-        document.getElementById("squat_start").disabled = "true";
+        document.getElementById("squatStart").disabled = "true";
         }
     
     function onSuccess(acceleration) {
@@ -74,7 +79,7 @@ function squatStop() {
     if(watchID) {
         navigator.accelerometer.clearWatch(watchID);
         watchID = null;
-        document.getElementById("squat_start").disabled = "";
+        document.getElementById("squatStart").disabled = "";
     }
 }
 

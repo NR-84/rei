@@ -1,4 +1,9 @@
 function onShowHomePage() {
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
 
     if (localStorage.getItem("nameKey") == null || localStorage.getItem("nameKey") == '') {
         document.getElementById("userName").textContent = "User name"
@@ -50,30 +55,62 @@ function onShowHomePage() {
         document.getElementById("bmiOutput").textContent = "BMI：--";
     }
     
-   var sitUpCountList = getSitUpList();
+    var sitUpCountList = getSitUpList();
+    if (localStorage.getItem("sitUpCountKey") == null || localStorage.getItem("sitUpCountKey") == '') {
+        document.getElementById("sitUpOutput").textContent = "0回";
+    } else {
         for (var sitUpCountVariable in sitUpCountList) {
             if (sitUpCountList[sitUpCountVariable].id == time) {
                 var sitUpCountElement = sitUpCountList[sitUpCountVariable];
             document.getElementById("sitUpOutput").textContent = sitUpCountElement.sicount +"回";
             break;
+            }
         }  
     }
     
     var backExtensionCountList = getBackExtensionList();
+    if (localStorage.getItem("backExtensionCountKey") == null || localStorage.getItem("backExtensionCountKey") == '') {
+        document.getElementById("backExtensionOutput").textContent = "0回";
+    } else {
         for (var backExtensionCountVariable in backExtensionCountList) {
             if (backExtensionCountList[backExtensionCountVariable].id == time) {
                 var backExtensionCountElement = backExtensionCountList[backExtensionCountVariable];
             document.getElementById("backExtensionOutput").textContent = backExtensionCountElement.bcount +"回";
             break;
+            }
         }  
     }
     
     var pushUpCountList = getPushUpList();
-    for (var pushUpCountVariable in pushUpCountList) {
-        if (pushUpCountList[pushUpCountVariable].id == time) {
-            var pushUpCountElement = pushUpCountList[pushUpCountVariable];
-        document.getElementById("pushUpOutput").textContent = pushUpCountElement.pcount +"回";
-        break;
+    if (localStorage.getItem("backExtensionCountKey") == null || localStorage.getItem("backExtensionCountKey") == '') {
+        document.getElementById("pushUpOutput").textContent = "0回";
+    } else {
+        for (var pushUpCountVariable in pushUpCountList) {
+            if (pushUpCountList[pushUpCountVariable].id == time) {
+                var pushUpCountElement = pushUpCountList[pushUpCountVariable];
+            document.getElementById("pushUpOutput").textContent = pushUpCountElement.pcount +"回";
+            break;
+            }
         }
     }
 }
+
+function clock() {
+    document.getElementById("viewClock").innerHTML = getNow();
+}
+
+timerID = setInterval('clock()',500); // 0.5秒おきに時間を取得
+
+function getNow() {
+    var nowTime = new Date();
+    var nowYear = nowTime.getFullYear();
+    var nowMon = nowTime.getMonth()+1;
+    var nowDay = nowTime.getDate();
+    var nowWeek = nowTime.getDay();
+
+    var youbi = new Array("日","月","火","水","木","金","土");
+    var setNowTime = nowYear + "年" + nowMon + "月" + nowDay + "日 (" + youbi[nowWeek] + ") ";
+    return setNowTime;
+       
+}
+
