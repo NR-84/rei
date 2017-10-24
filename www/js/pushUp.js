@@ -51,6 +51,11 @@ function onInitPushUp() {
 
 function addPushUp(pushUpCount) {
     var pushUpCountList = getPushUpList();
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
      
     pushUpCountList.push({id: time, pcount: pushUpCount});
     savePushUpList(pushUpCountList);

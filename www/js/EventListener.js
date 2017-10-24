@@ -22,14 +22,14 @@ document.addEventListener("init", function(event) {
         onInitTrainingLog();
         
     } else if(page.id === "weightGraph") {  // 日々の体重変化グラフ
-    
+        
         onInitWeightGraph();
-            
+        
     } else if(page.id === "weightRecord") {  // 日々の体重変化記録
     
         onInitWeightList();
         
-    }
+    } 
     
 });
 

@@ -169,3 +169,7 @@ button:active {
     width: 100%;
     text-align: center;
 }
+
+.ons-swiper-target {
+    height: 100%;
+}

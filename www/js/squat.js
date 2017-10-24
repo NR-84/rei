@@ -85,7 +85,12 @@ function squatStop() {
 
 function addSquat(squatCount) {
     var squatCountList = getSquatList();
-     
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
+    
     squatCountList.push({id: time, squcount: squatCount});
     saveSquatList(squatCountList);
 }
