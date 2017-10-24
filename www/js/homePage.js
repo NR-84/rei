@@ -24,14 +24,31 @@ function onShowHomePage() {
     }
     
     var weightRecordList = getWeightList();
-    if (localStorage.getItem("weightRecordKey") == null || localStorage.getItem("weightRecordKey") == '') {
+    var taizyu;
+    for (var weightRecordVariable in weightRecordList) {
+               if (weightRecordList[weightRecordVariable].id == time) {
+                        var weightRecordElement = weightRecordList[weightRecordVariable];
+                        
+                        if (weightRecordElement != null) {
+                            taizyu = "体重：" + weightRecordElement.weight +"kg";
+                        } else {
+                            taizyu = "体重未入力";
+                        }
+               } else {
+                   taizyu = "体重未入力";
+               }
+    }
+    document.getElementById("weightOutput").textContent = taizyu;
+                        
+    
+    /*if (localStorage.getItem("weightRecordKey") == null || localStorage.getItem("weightRecordKey") == '') {
         document.getElementById("weightOutput").textContent = "体重未入力";
     } else {
         for (var weightRecordVariable in weightRecordList) {
         var weightRecordElement = weightRecordList[weightRecordVariable];
             document.getElementById("weightOutput").textContent = "体重：" + weightRecordElement.weight +"kg";
         }
-    }
+    }*/
     if (localStorage.getItem("weightRecordKey") != null && localStorage.getItem("weightGoalKey") != null) {
        for (var weightRecordVariable in weightRecordList) {
         var weightRecordElement = weightRecordList[weightRecordVariable];

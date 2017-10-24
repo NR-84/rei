@@ -81,9 +81,3 @@ function deletWeight(id) {
         }   
     }
 }
-
-/*function onReady() {
-    $("#todayWeight").click(todayWeight);
-}
-
-$(onReady);*/

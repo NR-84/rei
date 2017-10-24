@@ -86,6 +86,11 @@ function sitUpStop() {
 
 function addsitUp(sitUpCount) {
     var sitUpCountList = getSitUpList();
+    var now = new Date();
+    var year = now.getFullYear();
+    var mon = now.getMonth()+1;
+    var day = now.getDate();
+    var time = year+"/"+mon+"/"+day;
      
     sitUpCountList.push({id: time, sicount: sitUpCount});
     saveSitUpList(sitUpCountList);
