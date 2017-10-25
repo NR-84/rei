@@ -5,14 +5,36 @@ function onInitBackExtension() {
     var day = now.getDate();
     var time = year+"/"+mon+"/"+day;
     var backExtensionCount = 0;
+    var state = 0;
     
-    function increment() {
-        backExtensionCount++; 
-        update();
+    function backExtensionStart() {
+    
+        var options = { frequency: 50 }; //0.05秒毎に更新
+        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+        
+        document.getElementById("backExtensionStart").disabled = "true";
+        }
+    
+    function onSuccess(acceleration) {
+        var element = document.getElementById('accelerometer_back');
+        
+        element.innerHTML = 'Y: ' + acceleration.y * 90/9.80665 + '<br/>';
+                            
+        if(state == 1 && (acceleration.y * 90/9.80665) > 60) { // 60°以上でカウント1
+            state = 0;
+            backExtensionCount++
+            update();
+        }else if(state == 0 && (acceleration.y * 90/9.80665) < 20) {
+            state = 1;
+        }
     }
-     
+    
+    function onError() {
+        console.error('Error!');
+    }
+    
     function reset() {
-        navigator.vibrate(200)
+        navigator.vibrate(150);
         if (backExtensionCount > 0 && confirm("リセットしますか？")) {
             backExtensionCount = 0;
             update();
@@ -45,10 +67,23 @@ function onInitBackExtension() {
         addBackExtension(backExtensionCount);
     }
     
-    $('.count-button').on("click", increment);
+    $('.start-button').on("click", backExtensionStart);
+    $('.stop-button').on("click", backExtensionStop);
+    $('#backExtension_back').on("click", backExtensionStop);
     $('.reset-button').on("click", reset);
     load();
-    update();      
+    update();    
+}
+
+var watchID = null;
+document.addEventListener("backbutton",backExtensionStop , false);
+
+function backExtensionStop() {
+    if(watchID) {
+        navigator.accelerometer.clearWatch(watchID);
+        watchID = null;
+        document.getElementById("backExtensionStart").disabled = "";
+    }
 }
 
 function addBackExtension(backExtensionCount) {
@@ -64,7 +99,7 @@ function addBackExtension(backExtensionCount) {
 }
 
 function getBackExtensionList() {
-    var backExtensionCountList = localStorage.getItem("backExtensionCountKey");
+    var backExtensionCountList = localStorage.getItem(BACKC);
     if (backExtensionCountList == null) {
         return new Array();
     } else {
@@ -74,7 +109,7 @@ function getBackExtensionList() {
 
 function saveBackExtensionList(backExtensionCountList) {
     try {
-        localStorage.setItem("backExtensionCountKey", JSON.stringify(backExtensionCountList));
+        localStorage.setItem(BACKC, JSON.stringify(backExtensionCountList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;

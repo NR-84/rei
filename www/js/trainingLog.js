@@ -14,10 +14,10 @@ function onInitTrainingLog() {
         var backExtensionCountElement = null;
         var squatCountElement = null;
         var pushUpCountElement = null;
-        var sigoal = localStorage.getItem("sitUpGoalKey");
-        var bgoal = localStorage.getItem("backExtensionGoalKey");
-        var squgoal = localStorage.getItem("squatGoalKey");
-        var pgoal = localStorage.getItem("pushUpGoalKey");
+        var sigoal = localStorage.getItem(SITUPG);
+        var bgoal = localStorage.getItem(BACKG);
+        var squgoal = localStorage.getItem(SQUATG);
+        var pgoal = localStorage.getItem(PUSHUPG);
         var sitUpCheck;
         var backExtensionCheck;
         var squatCheck;

@@ -36,7 +36,6 @@
 
 <body>
     
-    
     <ons-navigator id="appNavigator" swipeable swipe-target-width="80px">
         <ons-page>
             <ons-splitter id="appSplitter">
@@ -45,14 +44,14 @@
                         <ons-toolbar>
                             <div class="center">Home</div>
                             <div class="right">
-                                <ons-toolbar-button style="font-size: 18px" onclick="fn.pushPage({'id': 'add_to_tpl', 'title': 'add_to'}, 'slide')">
-                                追加</ons-toolbar-button>
+                                <ons-toolbar-button id="goSetting" style="font-size: 18px" onclick="fn.pushPage({'id': 'setting_tpl', 'title': 'setting'}, 'slide')">
+                                設定</ons-toolbar-button>
                             </div>
                         </ons-toolbar>
                         <ons-tabbar swipeable id="appTabbar" position="auto">
-                            <ons-tab label="Home" icon="ion-home" page="home_tpl" active></ons-tab>
-                            <ons-tab label="設定" icon="ion-gear-b" page="setting_tpl"></ons-tab>
-                            <ons-tab label="トレーニング" icon="ion-flag" page="training_tpl"></ons-tab>
+                            <ons-tab label="Home" icon="home" page="home_tpl" active></ons-tab>
+                            <ons-tab label="入力" icon="file-text-o" page="add_to_tpl"></ons-tab>
+                            <ons-tab label="トレーニング" icon="flag" page="training_tpl"></ons-tab>
                       </ons-tabbar>
                     </ons-page>
                 </ons-splitter-content>
@@ -65,7 +64,7 @@
             <div id="viewClock"></div>
             <div id="userName">User name</div>
             
-            <ons-card onclick="fn.pushPage({'id': 'weightGraph_tpl', 'title': 'weightGraph'},'slide')">
+            <ons-card class="card" onclick="fn.pushPage({'id': 'weightGraph_tpl', 'title': 'weightGraph'},'slide')">
                 <div id="home1">
                     <div class="inline-block-1">
                         <div id="ageOutput">年齢</div><hr/>
@@ -83,8 +82,9 @@
                 </div>
             </ons-card>
             
-            <ons-card onclick="fn.pushPage({'id': 'trainingLog_tpl', 'title': 'trainingLog'},'slide')">
+            <ons-card class="card" onclick="fn.pushPage({'id': 'trainingLog_tpl', 'title': 'trainingLog'},'slide')">
                 <div id="home2">
+                    <div class="inline-block-9">トレーニングカウント</div>
                     <div class="inline-block-5">
                         腹筋<div id="sitUpOutput">0回</div><hr/>
                     </div>
@@ -104,32 +104,64 @@
     
     <ons-template id="setting_tpl">
         <ons-page id="setting-page">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>戻る</ons-back-button>
+                </div>
+                <div class="center">設定</div>
+            </ons-toolbar>
             <ons-list>
                 <ons-list-header><ons-icon icon="user" class="list-item__icon"></ons-icon>
                 個人設定</ons-list-header>
-                <form name="settings" id="settings">
-                    <div class="text">　名前：<input id="nameInput" type="text" class="text-input"></div>
-                    <div class="text">　年齢：<input id="ageInput" type="number" class="text-input"></div>
-                    <div class="text">　性別：
-                        <label><input id="sex1" name="sexInput" type="radio" value="男性"/>男性</label>
-                        <label><input id="sex2" name="sexInput" type="radio" value="女性"/>女性</label>
-                        <label><input id="sex3" name="sexInput" type="radio" value="その他" />その他</label></div>
-                    <div class="text">　身長：<input id="heightInput" type="number" class="text-input"></div>
-                    <center><input id="set1" type="button" value="登録" onclick="userSetting();" /></center>　
-                </form>
+                <ons-list-item>
+                    <form name="settings" id="settings" style="width: 98%;">
+                        <div class="text">名前：<input id="nameInput" type="text" class="text-input"></div>
+                        <div class="text">年齢：<input id="ageInput" type="number" class="text-input"></div>
+                        <div class="text">性別：
+                            <label><input id="sex1" name="sexInput" type="radio" value="男性"/>男性</label>
+                            <label><input id="sex2" name="sexInput" type="radio" value="女性"/>女性</label>
+                            <label><input id="sex3" name="sexInput" type="radio" value="その他" />その他</label></div>
+                        <div class="text">身長：<input id="heightInput" type="number" class="text-input"></div>
+                        <center><input id="set1" class="set1" type="button" value="登録" onclick="userSetting();" /></center>
+                    </form>
+                </ons-list-item>
                 
                 <ons-list-header><ons-icon icon="fa-trophy" class="list-item__icon"></ons-icon>
                 目標設定</ons-list-header>
-                <form>
-                    <div class="text">　体重：<input id="weightGoalInput" type="number" class="text-input"></div>
-                    <div class="text">　腹筋：<input id="sitUpGoalInput" type="number" class="text-input"></div>
-                    <div class="text">　背筋：<input id="backExtensionGoalInput" type="number" class="text-input"></div>
-                    <div class="text">　ｽｸﾜｯﾄ：<input id="squatGoalInput" type="number" class="text-input"></div>
-                    <div class="text">　腕立伏せ：<input id="pushUpGoalInput" type="number" class="text-input" ></div>
-                    <center><input id="set2" type="button" value="保存" onclick="goalSetting();" /></center>　
-                </form>
-                <ons-list-header></ons-list-header>
-                <center><input id="delete" type="button" value="全削除" onclick="allDelete();" /></center>　
+                <ons-list-item>
+                    <form style="width: 98%;">
+                        <div class="text">体重：<input id="weightGoalInput" type="number" class="text-input"></div>
+                        <div class="text">腹筋：<input id="sitUpGoalInput" type="number" class="text-input"></div>
+                        <div class="text">背筋：<input id="backExtensionGoalInput" type="number" class="text-input"></div>
+                        <div class="text">ｽｸﾜｯﾄ：<input id="squatGoalInput" type="number" class="text-input"></div>
+                        <div class="text">腕立伏せ：<input id="pushUpGoalInput" type="number" class="text-input" ></div>
+                        <center><input id="set2" type="button" value="保存" onclick="goalSetting();" /></center>
+                    </form>
+                </ons-list-item>
+                <ons-list-item class="delete" modifier="chevron" onclick="fn.pushPage({'id': 'delete_tpl', 'title': 'slide'}, 'slide')">
+                リセット</ons-list-item>
+                
+            </ons-list>
+        </ons-page>
+    </ons-template>
+    
+    <ons-template id="delete_tpl">
+        <ons-page id="delete-page">
+            <ons-toolbar>
+                <div class="left">
+                    <ons-back-button>戻る</ons-back-button>
+                </div>
+                <div class="center">削除</div>
+            </ons-toolbar>
+            <ons-list>
+                <ons-list-item class="delete" onclick="settingDelete()">
+                設定リセット</ons-list-item>
+                <ons-list-item class="delete" onclick="weightDelete()">
+                体重記録リセット</ons-list-item>
+                <ons-list-item class="delete" onclick="countDelete()">
+                トレーニング記録リセット</ons-list-item>
+                <ons-list-item class="delete" onclick="allDelete();">
+                全データ削除</ons-list-item>
             </ons-list>
         </ons-page>
     </ons-template>
@@ -245,7 +277,7 @@
             <img src="img/no_00.png" width="55" class="counter-digit">
         </div>
         <div class="trainer">
-            <img src="img/sit_up.png" height="80" alt="sit_up">
+            <img src="img/sit_up.png" height="100" alt="sit_up">
         </div>
         
         <div id="accelerometer">Waiting for accelerometer...</div>
@@ -259,11 +291,11 @@
         <ons-page id="backExtensionCounter">
             <ons-toolbar>
                 <div class="left">
-            <ons-back-button>戻る</ons-back-button>
+            <ons-back-button id="backExtension_back">戻る</ons-back-button>
             </div>
             <div class="center">背筋</div>
             <div class="right">
-                <button class="reset-button"><img src="img/reset_button.png" height="40px"></button>   
+                <button class="reset-button"><img src="img/reset_button.png" height="50px"></button>   
             </div>
             </ons-toolbar>
         <div class="counter">
@@ -276,7 +308,9 @@
             <img src="img/back.png" width="150" alt="back_ex">
         </div>
         
-        <button class="count-button"><img src="img/T_count.png" width="95%"></button>
+        <div id="accelerometer_back">Waiting for accelerometer...</div>
+        <center><input type="button" id="backExtensionStart" value="Start" class="start-button"/></center>
+        <center><input type="button" id="backExtensionStop" value="Stop" class="stop-button"/></center>
         
         </ons-page>
     </ons-template>
@@ -289,7 +323,7 @@
             </div>
             <div class="center">スクワット</div>
             <div class="right">
-                <button class="reset-button"><img src="img/reset_button.png" height="40px"></button>   
+                <button class="reset-button"><img src="img/reset_button.png" height="50px"></button>   
             </div>
         </ons-toolbar>
         <div class="counter">
@@ -313,11 +347,11 @@
         <ons-page id="pushUpCounter">
             <ons-toolbar>
                 <div class="left">
-                    <ons-back-button>戻る</ons-back-button>
+                    <ons-back-button id="pushUp_back">戻る</ons-back-button>
                 </div>
                 <div class="center">腕立て伏せ</div>
                 <div class="right">
-                    <button class="reset-button"><img src="img/reset_button.png" height="40px"></button>
+                    <button class="reset-button"><img src="img/reset_button.png" height="50px"></button>
                 </div>
             </ons-toolbar>
             <div class="counter">
@@ -330,27 +364,31 @@
                 <img src="img/push_up.png" width="150" alt="push_up">
             </div>
             
-            <button class="count-button"><img src="img/T_count.png" width="95%"></button>
+            <div id="accelerometer_pushUp">Waiting for accelerometer...</div>
+            <center><input type="button" id="pushUpStart" value="Start" class="start-button"/></center>
+            <center><input type="button" id="pushUpStop" value="Stop" class="stop-button"/></center>
             
         </ons-page>
     </ons-template>
     
     <ons-template id="add_to_tpl">
         <ons-page id="add_to">
-            <ons-toolbar>
-                <div class="left">
-                    <ons-back-button>戻る</ons-back-button>
-                </div>
-                <div class="center">追加</div>
-            </ons-toolbar>
-            
             <form>
-                <div class="text">今日の体重：<input id="tweight" type="number" class="text-input"value=""></div>
-                <center><input id="set_weight" type="button" value="保存" onclick="todayWeight();" /></center>
+            <ons-list>
+                <div class="add-weight">　今日の体重：<input id="tweight" type="number" class="text-input" value="" style="width: 60%;"></div>
+                <center><input id="set_weight" type="button" value="登録" onclick="todayWeight();"/></center>　
+            </ons-list>
             </form>
             
         </ons-page>
     </ons-template>
     
+    <script>
+    if (start == 0) { // ローカルストレージ内に一切のデータがない場合設定画面へ移動
+        var page = {id: 'setting_tpl', title: 'setting'};
+        window.fn.pushPage(page, 'slide');
+        setTimeout(function(){alert('設定を入力してください');},1000);
+    }
+    </script>
 </body>
 </html>

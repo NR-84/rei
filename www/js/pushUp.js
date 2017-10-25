@@ -5,21 +5,43 @@ function onInitPushUp() {
     var day = now.getDate();
     var time = year+"/"+mon+"/"+day;
     var pushUpCount = 0;
+    var state = 0;
     
-    function increment() {
-        pushUpCount++; 
-        update();
+    function pushUpStart() {
+    
+        var options = { frequency: 100 }; //0.05秒毎に更新
+        watchID = navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+        
+        document.getElementById("pushUpStart").disabled = "true";
+        }
+    
+    function onSuccess(acceleration) {
+        var element = document.getElementById('accelerometer_pushUp');
+        
+        element.innerHTML = 'Z: ' + acceleration.z / 9.8066 ;
+    
+    if(state == 0 && (acceleration.z / 9.80665) > 1.1) { //Z方向に加速度1.1以上でカウント1
+            state = 1;
+            pushUpCount++
+            update();
+        }else if(state == 1 && (acceleration.z / 9.80665) < 0.8) {
+            state = 0;
+        }
+    }
+    
+    function onError() {
+        console.error('Error!');
     }
      
-    function reset() {
-        navigator.vibrate(200)
+    function reset() { //カウントリセット
+        navigator.vibrate(150);
         if (pushUpCount > 0 && confirm("リセットしますか？")) {
             pushUpCount = 0;
             update();
         }
     }
     
-    function load() {
+    function load() { //カウントロード
         pushUpCount = 0;
         var pushUpCountList = getPushUpList();
         for (var pushUpCountVariable in pushUpCountList) {
@@ -30,7 +52,7 @@ function onInitPushUp() {
         }
     }
     
-    function update() {
+    function update() { //カウントアップ表示
         var str = '0000' + pushUpCount;
         str = str.substring(str.length - 4, str.length);
         
@@ -43,10 +65,22 @@ function onInitPushUp() {
         addPushUp(pushUpCount);
     }
     
-        $('.count-button').on("click", increment);
-        $('.reset-button').on("click", reset);
-        load();
-        update();
+    $('.start-button').on("click", pushUpStart);
+    $('.stop-button').on("click", pushUpStop);
+    $('#pushUp_back').on("click", pushUpStop);
+    $('.reset-button').on("click", reset);
+    load();
+    update();
+}
+
+document.addEventListener("backbutton",pushUpStop , false);
+
+function pushUpStop() {
+    if(watchID) {
+        navigator.accelerometer.clearWatch(watchID);
+        watchID = null;
+        document.getElementById("pushUpStart").disabled = "";
+    }
 }
 
 function addPushUp(pushUpCount) {

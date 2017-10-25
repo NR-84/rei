@@ -20,7 +20,7 @@ function onInitSquat() {
         
         element.innerHTML = 'Y: ' + acceleration.y / 9.8066 ;
     
-    if(state == 0 && (acceleration.y / 9.80665) > 1.3) {
+    if(state == 0 && (acceleration.y / 9.80665) > 1.25) { //Y方向に加速度1.25以上でカウント1
             state = 1;
             squatCount++
             update();
@@ -33,15 +33,15 @@ function onInitSquat() {
         console.error('Error!');
     }
     
-    function reset() {
-        navigator.vibrate(200)
+    function reset() { //カウントリセット
+        navigator.vibrate(150);
         if (squatCount > 0 && confirm("リセットしますか？")) {
             squatCount = 0;
             update();
         }
     }
     
-    function load() {
+    function load() { //カウントロード
         squatCount = 0;
         var squatCountList = getSquatList();
         for (var squatCountVariable in squatCountList) {
@@ -53,7 +53,7 @@ function onInitSquat() {
         }
     }
     
-    function update() {
+    function update() { //カウントアップ表示
         var str = '0000' + squatCount;
         str = str.substring(str.length - 4, str.length);
         
@@ -96,7 +96,7 @@ function addSquat(squatCount) {
 }
 
 function getSquatList() {
-    var squatCountList = localStorage.getItem("squatCountKey");
+    var squatCountList = localStorage.getItem(SQUATC);
     if (squatCountList == null) {
         return new Array();
     } else {
@@ -106,7 +106,7 @@ function getSquatList() {
 
 function saveSquatList(squatCountList) {
     try {
-        localStorage.setItem("squatCountKey", JSON.stringify(squatCountList));
+        localStorage.setItem(SQUATC, JSON.stringify(squatCountList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;

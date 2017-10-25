@@ -20,7 +20,7 @@ function onInitSitUp() {
         
         element.innerHTML = 'Y: ' + acceleration.y * 90/9.80665 + '<br />';
                             
-        if(state == 1 && (acceleration.y * 90/9.80665) > 75) {
+        if(state == 1 && (acceleration.y * 90/9.80665) > 70) { // 70°以上でカウント1
             state = 0;
             sitUpCount++
             update();
@@ -33,15 +33,15 @@ function onInitSitUp() {
         console.error('Error!');
     }
     
-    function reset() {
-        navigator.vibrate(200)
+    function reset() { //カウントリセット
+        navigator.vibrate(150);
         if (sitUpCount > 0 && confirm("リセットしますか？")) {
             sitUpCount = 0;
             update();
         }
     }
     
-    function load() {
+    function load() {　//カウントロード
         sitUpCount = 0;
         var sitUpCountList = getSitUpList();
         for (var sitUpCountVariable in sitUpCountList) {
@@ -53,7 +53,7 @@ function onInitSitUp() {
         }
     }
     
-    function update() {
+    function update() { //カウントアップ表示
         var str = '0000' + sitUpCount;
         str = str.substring(str.length - 4, str.length);
         
@@ -97,7 +97,7 @@ function addsitUp(sitUpCount) {
 }
 
 function getSitUpList() {
-    var sitUpCountList = localStorage.getItem("sitUpCountKey");
+    var sitUpCountList = localStorage.getItem(SITUPC);
     if (sitUpCountList == null) {
         return new Array();
     } else {
@@ -107,7 +107,7 @@ function getSitUpList() {
 
 function saveSitUpList(sitUpCountList) {
     try {
-        localStorage.setItem("sitUpCountKey", JSON.stringify(sitUpCountList));
+        localStorage.setItem(SITUPC, JSON.stringify(sitUpCountList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;

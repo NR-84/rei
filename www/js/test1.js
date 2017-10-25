@@ -30,3 +30,52 @@ ons.ready(function () {
         }
     });
 });
+
+var NAME = 'namekey';
+var AGE = 'ageKey';
+var SEX = 'sexKey';
+var HEIGHT = 'heightKey';
+var WEIGHTG = 'weightGoalKey';
+var SITUPG = 'sitUpGoalKey';
+var BACKG = 'backExtensionGoalKey';
+var SQUATG = 'squatGoalKey';
+var PUSHUPG = 'pushUpGoalKey';
+var WEIGHTR = 'weightRecordKey';
+var SITUPC = 'sitUpCountKey';
+var BACKC = 'backExtensionCountKey';
+var SQUATC = 'squatCountKey';
+var PUSHUPC = 'pushUpCountKey';
+
+// 全データの有無を確認
+var start = 0;
+if (localStorage.getItem(NAME) != null) {
+    start = 1;
+} else if (localStorage.getItem(AGE) != null) {
+    start = 1;
+} else if (localStorage.getItem(SEX) != null) {
+    start = 1;
+} else if (localStorage.getItem(HEIGHT) != null) {
+    start = 1;
+} else if (localStorage.getItem(WEIGHTG) != null) {
+    start = 1;
+} else if (localStorage.getItem(SITUPG) != null) {
+    start = 1;
+} else if (localStorage.getItem(BACKG) != null) {
+    start = 1;
+} else if (localStorage.getItem(SQUATG) != null) {
+    start = 1;
+} else if (localStorage.getItem(PUSHUPG) != null) {
+    start = 1;
+} else if (localStorage.getItem(WEIGHTR) != null) {
+    start = 1;
+} else if (localStorage.getItem(SITUPC) != null) {
+    start = 1;
+} else if (localStorage.getItem(BACKC) != null) {
+    start = 1;
+} else if (localStorage.getItem(SQUATC) != null) {
+    start = 1;
+}else if (localStorage.getItem(PUSHUPC) != null) {
+    start = 1;
+} else {
+    start = 0;
+}

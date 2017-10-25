@@ -13,10 +13,10 @@ function onInitWeightList() {
             tag3;
         var row_len = table.rows.length;
         
-         if (localStorage.getItem("heightKey") == null || localStorage.getItem("heightKey") == '') {
+         if (localStorage.getItem(HEIGHT) == null || localStorage.getItem(HEIGHT) == '') {
              tag3 = "-";
          } else {
-             var bmiCalculation = ((weightRecordElement.weight)/(localStorage.getItem("height")*localStorage.getItem("height")*0.0001));
+             var bmiCalculation = ((weightRecordElement.weight)/(localStorage.getItem(HEIGHT)*localStorage.getItem(HEIGHT)*0.0001));
              tag3 = bmiCalculation.toFixed(2);
          }
         
@@ -54,7 +54,7 @@ function addWeight(wtext) {
 }
 
 function getWeightList() {
-    var weightRecordList = localStorage.getItem("weightRecordKey");
+    var weightRecordList = localStorage.getItem(WEIGHTR);
     if (weightRecordList == null) {
         return new Array();
     } else {
@@ -64,7 +64,7 @@ function getWeightList() {
 
 function saveWeightList(weightRecordList) {
     try {
-        localStorage.setItem("weightRecordKey", JSON.stringify(weightRecordList));
+        localStorage.setItem(WEIGHTR, JSON.stringify(weightRecordList));
     } catch (e) {
         alert('Error saving to storage.');
         throw e;

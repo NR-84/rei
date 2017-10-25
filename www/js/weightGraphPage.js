@@ -186,7 +186,7 @@ function onInitWeightGraph() {
                 var maxweight = 0;
                 var minweight = 500;
                 
-                for( var i=0; i<12; i++ ){　//6回繰り返し
+                for( var i=0; i<12; i++ ){　//12回繰り返し
                     var year3 = x.getFullYear();
                     var mon3 = x.getMonth()+1;
                     var day3 = x.getDate();
