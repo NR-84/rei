@@ -31,6 +31,7 @@ ons.ready(function () {
     });
 });
 
+// ローカルストレージ定数
 var NAME = 'namekey';
 var AGE = 'ageKey';
 var SEX = 'sexKey';

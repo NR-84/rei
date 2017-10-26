@@ -16,15 +16,14 @@ function onInitBackExtension() {
         }
     
     function onSuccess(acceleration) {
-        var element = document.getElementById('accelerometer_back');
         
-        element.innerHTML = 'Y: ' + acceleration.y * 90/9.80665 + '<br/>';
+        var backExtensionY = Math.abs(acceleration.y * 90/9.80665); // Y軸方向加速度の絶対値
                             
-        if(state == 1 && (acceleration.y * 90/9.80665) > 60) { // 60°以上でカウント1
+        if(state == 1 && backExtensionY > 60) { // 60°以上でカウント1
             state = 0;
             backExtensionCount++
             update();
-        }else if(state == 0 && (acceleration.y * 90/9.80665) < 20) {
+        }else if(state == 0 && backExtensionY < 20) {
             state = 1;
         }
     }
@@ -33,12 +32,14 @@ function onInitBackExtension() {
         console.error('Error!');
     }
     
-    function reset() {
-        navigator.vibrate(150);
-        if (backExtensionCount > 0 && confirm("リセットしますか？")) {
-            backExtensionCount = 0;
+    function reset() { //カウントリセット
+        if (pushUpCount > 0) {
+            navigator.vibrate(150);
+            if (confirm("リセットしますか？")) {
+            pushUpCount = 0;
             update();
-        }
+            }
+        }   
     }
     
     function load() {

@@ -16,15 +16,14 @@ function onInitPushUp() {
         }
     
     function onSuccess(acceleration) {
-        var element = document.getElementById('accelerometer_pushUp');
         
-        element.innerHTML = 'Z: ' + acceleration.z / 9.8066 ;
-    
-    if(state == 0 && (acceleration.z / 9.80665) > 1.1) { //Z方向に加速度1.1以上でカウント1
-            state = 1;
-            pushUpCount++
-            update();
-        }else if(state == 1 && (acceleration.z / 9.80665) < 0.8) {
+        var pushUpZ = Math.abs(acceleration.z / 9.80665);　// Z軸方向加速度の絶対値
+        
+        if(state == 0 && pushUpZ > 1.15) { //Z方向に加速度1.15以上でカウント1
+                state = 1;
+                pushUpCount++
+                update();
+        }else if(state == 1 && pushUpZ < 0.8) {
             state = 0;
         }
     }
@@ -34,11 +33,13 @@ function onInitPushUp() {
     }
      
     function reset() { //カウントリセット
-        navigator.vibrate(150);
-        if (pushUpCount > 0 && confirm("リセットしますか？")) {
+        if (pushUpCount > 0) {
+            navigator.vibrate(150);
+            if (confirm("リセットしますか？")) {
             pushUpCount = 0;
             update();
-        }
+            }
+        }   
     }
     
     function load() { //カウントロード

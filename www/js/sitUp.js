@@ -16,15 +16,14 @@ function onInitSitUp() {
         }
     
     function onSuccess(acceleration) {
-        var element = document.getElementById('accelerometer');
         
-        element.innerHTML = 'Y: ' + acceleration.y * 90/9.80665 + '<br />';
-                            
-        if(state == 1 && (acceleration.y * 90/9.80665) > 70) { // 70°以上でカウント1
+        var sitUpY = Math.abs(acceleration.y * 90/9.80665);　// Y軸方向加速度の絶対値
+        
+        if(state == 1 && sitUpY > 70) { // 70°以上でカウント1
             state = 0;
             sitUpCount++
             update();
-        }else if(state == 0 && (acceleration.y * 90/9.80665) < 30) {
+        }else if(state == 0 && sitUpY < 30) {
             state = 1;
         }
     }
@@ -34,11 +33,13 @@ function onInitSitUp() {
     }
     
     function reset() { //カウントリセット
-        navigator.vibrate(150);
-        if (sitUpCount > 0 && confirm("リセットしますか？")) {
-            sitUpCount = 0;
+        if (pushUpCount > 0) {
+            navigator.vibrate(150);
+            if (confirm("リセットしますか？")) {
+            pushUpCount = 0;
             update();
-        }
+            }
+        }   
     }
     
     function load() {　//カウントロード

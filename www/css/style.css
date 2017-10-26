@@ -169,7 +169,7 @@ button:active {
 }
 
 .reset-button {
-    margin-top: 5px;
+    height: 100%;
 }
 
 #weightTable, #trainingTable {
