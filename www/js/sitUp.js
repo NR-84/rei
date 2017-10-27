@@ -33,12 +33,12 @@ function onInitSitUp() {
     }
     
     function reset() { //カウントリセット
-        if (pushUpCount > 0) {
+        if (sitUpCount > 0) {
             navigator.vibrate(150);
-            if (confirm("リセットしますか？")) {
-            pushUpCount = 0;
-            update();
-            }
+        }
+        if (sitUpCount > 0 && confirm("リセットしますか？")) {
+        sitUpCount = 0;
+        update();
         }   
     }
     

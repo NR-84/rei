@@ -29,7 +29,10 @@ document.addEventListener("init", function(event) {
     
         onInitWeightList();
         
-    } 
+    } else if(page.id === "setting-page") {　// 設定画面
+        
+        onShowSetting();
+    }
     
 });
 
@@ -39,10 +42,6 @@ document.addEventListener("show", function(event) {
     if(page.id === "home") {　// ホーム画面
         
         onShowHomePage();
-         
-    } else if(page.id === "setting-page") {　// 設定画面
-        
-        onShowSetting();
         
     }  else if(page.id === "training") {　// トレーニング選択画面
         

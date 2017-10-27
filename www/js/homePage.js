@@ -3,7 +3,11 @@ function onShowHomePage() {
     var year = now.getFullYear();
     var mon = now.getMonth()+1;
     var day = now.getDate();
-    var time = year+"/"+mon+"/"+day;
+    var lastYear = now.getFullYear()-1;
+    var tenDay = now.getDate()-10;
+    var time = year+"/"+mon+"/"+day; // 今日
+    var lastTime =  lastYear+"/"+mon+"/"+day;　// 1年前
+    var tenTime = year+"/"+mon+"/"+tenDay; //10日前
 
     if (localStorage.getItem(NAME) == null || localStorage.getItem(NAME) == '') { //データがあるときローカルストレージ内名前取得
         document.getElementById("userName").textContent = "User name"
@@ -65,63 +69,105 @@ function onShowHomePage() {
     }
     
     var sitUpCountList = getSitUpList();
-    if (localStorage.getItem(SITUPC) == null || localStorage.getItem(SITUPC) == '') {　//データがあるとき腹筋カウント表示
-        document.getElementById("sitUpOutput").textContent = "0回";
-    } else {
-        for (var sitUpCountVariable in sitUpCountList) {
-            if (sitUpCountList[sitUpCountVariable].id == time) {
-                var sitUpCountElement = sitUpCountList[sitUpCountVariable];
-            document.getElementById("sitUpOutput").textContent = sitUpCountElement.sicount +"回";
-            break;
+    var sit = "0回";
+    for (var sitUpCountVariable in sitUpCountList) {
+        if (sitUpCountList[sitUpCountVariable].id == time) { //データがあるとき腹筋カウント取得
+            var sitUpCountElement = sitUpCountList[sitUpCountVariable];
+            
+            if (sitUpCountElement != null) {
+                sit = sitUpCountElement.sicount +"回";
             }
-        }  
-    }
+        }
+    }  
+    document.getElementById("sitUpOutput").textContent = sit;
     
     var backExtensionCountList = getBackExtensionList();
-    if (localStorage.getItem(BACKC) == null || localStorage.getItem(BACKC) == '') {　//データがあるとき背筋カウント表示
-        document.getElementById("backExtensionOutput").textContent = "0回";
-    } else {
-        for (var backExtensionCountVariable in backExtensionCountList) {
-            if (backExtensionCountList[backExtensionCountVariable].id == time) {
-                var backExtensionCountElement = backExtensionCountList[backExtensionCountVariable];
-            document.getElementById("backExtensionOutput").textContent = backExtensionCountElement.bcount +"回";
-            break;
+    var bac = "0回";
+    for (var backExtensionCountVariable in backExtensionCountList) {
+        if (backExtensionCountList[backExtensionCountVariable].id == time) {　//データがあるとき背筋カウント表示
+            var backExtensionCountElement = backExtensionCountList[backExtensionCountVariable];
+            
+            if (backExtensionCountElement != null) {
+                bac = backExtensionCountElement.bcount +"回";
             }
-        }  
-    }
+        }
+    }  
+     document.getElementById("backExtensionOutput").textContent = bac;
     
     var squatCountList = getSquatList();
-    if (localStorage.getItem(SQUATC) == null || localStorage.getItem(SQUATC) == '') {　//データがあるときスクワットカウント表示
-        document.getElementById("squatOutput").textContent = "0回";
-    } else {
-        for (var squatCountVariable in squatCountList) {
-            if (squatCountList[squatCountVariable].id == time) {
-                var squatCountElement = squatCountList[squatCountVariable];
-            document.getElementById("squatOutput").textContent = squatCountElement.squcount +"回";
-            break;
+    var squ = "0回";
+    for (var squatCountVariable in squatCountList) {
+        if (squatCountList[squatCountVariable].id == time) {　//データがあるときスクワットカウント表示
+            var squatCountElement = squatCountList[squatCountVariable];
+            
+            if (squatCountElement != null) {
+                squ = squatCountElement.squcount +"回";
             }
+        }
+    }
+     document.getElementById("squatOutput").textContent = squ;
+    
+    var pushUpCountList = getPushUpList();
+    var pus = "0回";
+    for (var pushUpCountVariable in pushUpCountList) {
+        if (pushUpCountList[pushUpCountVariable].id == time) {　//データがあるとき腕立てカウント表示
+            var pushUpCountElement = pushUpCountList[pushUpCountVariable];
+            
+            if (pushUpCountElement != null) {
+                pus = pushUpCountElement.pcount +"回";
+            }
+        }
+    }
+    document.getElementById("pushUpOutput").textContent = pus;
+    
+    for (var weightRecordVariable in weightRecordList) {
+        if (weightRecordList[weightRecordVariable].id == lastTime) {　//1年前のデータ削除
+            weightRecordList.splice(weightRecordVariable, 1);
+            saveWeightList(weightRecordList);
+            break;
+        }   
+    }
+    
+    for (var sitUpCountVariable in sitUpCountList) {
+        if (sitUpCountList[sitUpCountVariable].id == tenTime) {　//10日前のデータ削除
+            sitUpCountList.splice(sitUpCountVariable, 1);
+            saveSitUpList(sitUpCountList);
+            break; 
         }
     }
     
-    var pushUpCountList = getPushUpList();
-    if (localStorage.getItem(PUSHUPC) == null || localStorage.getItem(PUSHUPC) == '') {　//データがあるとき腕立てカウント表示
-        document.getElementById("pushUpOutput").textContent = "0回";
-    } else {
-        for (var pushUpCountVariable in pushUpCountList) {
-            if (pushUpCountList[pushUpCountVariable].id == time) {
-                var pushUpCountElement = pushUpCountList[pushUpCountVariable];
-            document.getElementById("pushUpOutput").textContent = pushUpCountElement.pcount +"回";
-            break;
-            }
+    for (var backExtensionCountVariable in backExtensionCountList) {
+        if (backExtensionCountList[backExtensionCountVariable].id == tenTime) {　//10日前のデータ削除
+            backExtensionCountList.splice(backExtensionCountVariable, 1);
+            saveBackExtensionList(backExtensionCountList);
+            break; 
         }
     }
+    
+    for (var squatCountVariable in squatCountList) {
+        if (squatCountList[squatCountVariable].id == tenTime) {　//10日前のデータ削除
+            squatCountList.splice(squatCountVariable, 1);
+            saveSquatList(squatCountList);
+            break;
+        }
+    }
+    
+    for (var pushUpCountVariable in pushUpCountList) {
+        if (pushUpCountList[pushUpCountVariable].id == tenTime) {　//10日前のデータ削除
+            pushUpCountList.splice(pushUpCountVariable, 1);
+            savePushUpList(pushUpCountList);
+            break; 
+        }
+    }
+    
+    
 }
 
 function clock() {
     document.getElementById("viewClock").innerHTML = getNow();
 }
 
-timerID = setInterval('clock()',500); // 0.5秒おきに時間を取得
+timerID = setInterval('clock()',1000); // 1秒おきに時間を取得
 
 function getNow() {
     var nowTime = new Date();

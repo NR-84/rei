@@ -52,7 +52,7 @@ function onInitTrainingLog() {
         }
         
         if(sitUpCountElement != null) {
-            if(sigoal == null){
+            if(sigoal == null || sigoal == ''){
                 sitUpCheck = "-";
             } else if(sigoal > sitUpCountElement.sicount) {
                 sitUpCheck = "×";
@@ -60,11 +60,11 @@ function onInitTrainingLog() {
                 sitUpCheck = "○";
             }
         } else {
-            sitUpCheck = "-";
+            sitUpCheck = "×";
         }
         
         if(backExtensionCountElement != null) {
-            if(bgoal == null){
+            if(bgoal == null || bgoal == ''){
                 backExtensionCheck = "-";
             } else if(bgoal > backExtensionCountElement.bcount) {
                 backExtensionCheck = "×";
@@ -72,23 +72,23 @@ function onInitTrainingLog() {
                 backExtensionCheck = "○";
             }
         } else {
-            backExtensionCheck = "-";
+            backExtensionCheck = "×";
         }
         
         if(squatCountElement != null) {
-            if(bgoal == null){
+            if(squgoal == null || squgoal == ''){
                 squatCheck = "-";
-            } else if(bgoal > squatCountElement.squcount) {
+            } else if(squgoal > squatCountElement.squcount) {
                 squatCheck = "×";
-            } else if(bgoal <= squatCountElement.squcount) {
+            } else if(squgoal <= squatCountElement.squcount) {
                 squatCheck = "○";
             }
         } else {
-            squatCheck = "-";
+            squatCheck = "×";
         }
         
         if(pushUpCountElement != null) {
-            if(pgoal == null) {
+            if(pgoal == null || pgoal == '') {
                 pushUpCheck = "-";
             } else if(pgoal > pushUpCountElement.pcount) {
                 pushUpCheck = "×";
@@ -96,7 +96,7 @@ function onInitTrainingLog() {
                 pushUpCheck = "○";
             }
         } else {
-            pushUpCheck = "-";
+            pushUpCheck = "×";
         }
         
         var table = document.getElementById("trainingTable");

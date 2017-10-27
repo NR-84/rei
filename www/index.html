@@ -212,7 +212,7 @@
                     <button class="button-bar__button">1年</button>
                 </div>
             </div>
-            <h2>　</h2>
+            <h4>　</h4>
             <center><div id="makeGraph" style="height: 20%; width: 95%;"></div></center>
             
         </ons-page>
@@ -228,7 +228,7 @@
             </ons-toolbar>
             
             <table id="weightTable" border=1>
-                <tr>
+                <tr style="background:#F2F5A9">
                     <th>日付</th>
                     <th>体重</th>
                     <th>BMI</th>
@@ -247,7 +247,7 @@
         </ons-toolbar>
         
         <table id="trainingTable" border=1>
-            <tr>
+            <tr style="background:#A9F5A9">
                 <th>日付</th>
                 <th>腹筋</th>
                 <th>背筋</th>
@@ -382,7 +382,7 @@
     <script>
     if (start == 0) { // ローカルストレージ内に一切のデータがない場合設定画面へ移動
         var page = {id: 'setting_tpl', title: 'setting'};
-        window.fn.pushPage(page, 'slide');
+        window.fn.pushPage(page, 'lift');
         setTimeout(function(){alert('設定を入力してください');},1000);
     }
     </script>

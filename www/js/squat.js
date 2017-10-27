@@ -33,12 +33,12 @@ function onInitSquat() {
     }
     
     function reset() { //カウントリセット
-        if (pushUpCount > 0) {
+        if (squatCount > 0) {
             navigator.vibrate(150);
-            if (confirm("リセットしますか？")) {
-            pushUpCount = 0;
-            update();
-            }
+        }
+        if (squatCount > 0 && confirm("リセットしますか？")) {
+        squatCount = 0;
+        update();
         }   
     }
     

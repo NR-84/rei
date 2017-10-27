@@ -33,12 +33,12 @@ function onInitBackExtension() {
     }
     
     function reset() { //カウントリセット
-        if (pushUpCount > 0) {
+        if (backExtensionCount > 0) {
             navigator.vibrate(150);
-            if (confirm("リセットしますか？")) {
-            pushUpCount = 0;
-            update();
-            }
+        }
+        if (backExtensionCount > 0 && confirm("リセットしますか？")) {
+        backExtensionCount = 0;
+        update();
         }   
     }
     

@@ -3,7 +3,7 @@ function onInitWeightList() {
     for (var weightRecordVariable in weightRecordList) {
         var weightRecordElement = weightRecordList[weightRecordVariable];
         
-        var table = document.getElementById("weightTable");
+        var table = document.getElementById("weightTable"); // 体重テーブル作成
         var tr = table.insertRow(1);
         var td1 = tr.insertCell(-1),
             td2 = tr.insertCell(-1),
@@ -17,14 +17,14 @@ function onInitWeightList() {
              tag3 = "-";
          } else {
              var bmiCalculation = ((weightRecordElement.weight)/(localStorage.getItem(HEIGHT)*localStorage.getItem(HEIGHT)*0.0001));
-             tag3 = bmiCalculation.toFixed(2);
+             tag3 = bmiCalculation.toFixed(2);　// BIM小数点以下2桁
          }
         
         td1.id = weightRecordElement.id;
         td1.innerHTML = tag1;
         td2.innerHTML = tag2;
         td3.innerHTML = tag3;
-    }  
+    }
 }
 
 function todayWeight() {
@@ -34,7 +34,7 @@ function todayWeight() {
     var mon = now.getMonth()+1;
     var day = now.getDate();
     var time = year+"/"+mon+"/"+day;   
-    if (wtext != '') {
+    if (wtext != '') {　// 体重のデータが入っていればデータを渡す
         deletWeight(time);
         addWeight(wtext);
         $("#tweight").val("");
@@ -49,7 +49,7 @@ function addWeight(wtext) {
     var day = now.getDate();
     var time = year+"/"+mon+"/"+day;
      
-    weightRecordList.push({id: time, weight: wtext});
+    weightRecordList.push({id: time, weight: wtext});　// 配列保存
     saveWeightList(weightRecordList);
 }
 
@@ -71,7 +71,7 @@ function saveWeightList(weightRecordList) {
     }
 }
 
-function deletWeight(id) {
+function deletWeight(id) {　// 同日のデータは上書き
     var weightRecordList = getWeightList();
     for (var weightRecordVariable in weightRecordList) {
         if (weightRecordList[weightRecordVariable].id == id) {
